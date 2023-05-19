@@ -56,3 +56,14 @@ docker run --name daily-budget-postgres-cont -p 5432:5432 -e POSTGRES_PASSWORD=a
 
 #Iniciar imagen
 docker run daily-budget-postgres-img
+
+
+ARQUITECTURA
+
+
+HEXAGONAL, 
+CQS
+
+
+MONO= 1
+FLUX = **
