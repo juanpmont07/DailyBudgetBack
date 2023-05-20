@@ -1,4 +1,4 @@
-package com.dailyBudget.infrastructure.dtos;
+package com.dailyBudget.budgetapi.infrastructure.dtos;
 
 import lombok.Data;
 
