@@ -1,4 +1,4 @@
-package com.dailyBudget.budgetapi;
+package com.dailybudget.budgetapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

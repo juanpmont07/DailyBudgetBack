@@ -1,4 +1,4 @@
-package com.dailyBudget.budgetapi.infrastructure.config;
+package com.dailybudget.budgetapi.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
