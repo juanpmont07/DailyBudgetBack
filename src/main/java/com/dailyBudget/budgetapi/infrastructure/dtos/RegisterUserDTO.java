@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 @Data
-public class RegisterUserDTO {
+public class RegisterUserDTO implements DTO{
     private UUID id;
     private String name;
     private BigDecimal salary;

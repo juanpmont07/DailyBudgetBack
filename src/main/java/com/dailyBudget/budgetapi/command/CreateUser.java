@@ -1,17 +1,18 @@
 package com.dailyBudget.budgetapi.command;
 
+import com.dailyBudget.budgetapi.infrastructure.dtos.DTO;
 import com.dailyBudget.budgetapi.infrastructure.dtos.RegisterUserDTO;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
 
 @Service
-public class CreateUser {
+public class CreateUser implements Command<RegisterUserDTO, String>{
 
     public CreateUser() {
     }
 
-    public Mono<String> execute(RegisterUserDTO registerUserDTO){
-       return Mono.just(registerUserDTO.toString());
+    @Override
+    public Flux<String> execute(RegisterUserDTO registerUserDTO){
+       return Flux.just(registerUserDTO.toString());
    }
-
 }
