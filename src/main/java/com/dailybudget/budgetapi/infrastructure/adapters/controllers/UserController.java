@@ -2,17 +2,13 @@ package com.dailybudget.budgetapi.infrastructure.adapters.controllers;
 
 import com.dailybudget.budgetapi.application.command.CreateUser;
 import com.dailybudget.budgetapi.presentation.dtos.RegisterUserDTO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.dailybudget.budgetapi.presentation.dtos.ResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -31,17 +27,22 @@ public class UserController {
         return Mono.just("1.0.0");
     }
 
-    @PostMapping
-    public Flux<ResponseEntity<com.dailybudget.budgetapi.domain.models.User>> registerUser(@RequestBody RegisterUserDTO registerUserDTO) {
+    @PostMapping("/register")
+    public Mono<ResponseEntity<ResponseDTO>> registerUser(@RequestBody RegisterUserDTO registerUserDTO) {
          return createUser.execute(registerUserDTO)
-                 .map(user -> ResponseEntity.status(HttpStatus.CREATED).body(user));
+                 .map(user -> ResponseEntity.status(HttpStatus.CREATED).body(new ResponseDTO(user)))
+                 .onErrorResume(throwable -> {
+                     String errorMessage = throwable.getMessage();
+                     HttpStatus errorStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+                     return Mono.just(ResponseEntity.status(errorStatus).body(new ResponseDTO(errorMessage)));
+                 });
     }
 
     @GetMapping("/users")
     public Mono<ResponseEntity<String>> getUserAll() {
         return Mono.just( ResponseEntity.status(HttpStatus.ACCEPTED).body("aquiiiii muchos usuarios"));
     }
-
+/*
     @GetMapping("/example")
     public Mono<ResponseEntity<String>> example() {
 
@@ -135,5 +136,5 @@ public class UserController {
         });
 
         return Mono.just( ResponseEntity.status(HttpStatus.ACCEPTED).body("example 5"));
-    }
+    }*/
 }

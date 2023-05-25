@@ -1,5 +1,6 @@
 package com.dailybudget.budgetapi.application.service.user;
 
+import com.dailybudget.budgetapi.domain.exceptions.DomainException;
 import com.dailybudget.budgetapi.domain.models.User;
 import com.dailybudget.budgetapi.domain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,10 @@ public class RegisterUser {
     }
 
     public Mono<User> register(User user){
-       return  userService.getById(user.getId()).switchIfEmpty(userService.register(user));
+       return  userService.getById(user.getId()).
+               flatMap(userExist -> Mono.error(new DomainException("User exist"))).
+               switchIfEmpty(userService.register(user))
+               .cast(User.class);
     }
 
 }
