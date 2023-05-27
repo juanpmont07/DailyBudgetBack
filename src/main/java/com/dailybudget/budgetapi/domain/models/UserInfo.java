@@ -9,10 +9,9 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name = "userinfo")
-public class User {
+public class UserInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String name;
     private BigDecimal salary;

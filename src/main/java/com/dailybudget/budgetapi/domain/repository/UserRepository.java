@@ -1,14 +1,14 @@
 package com.dailybudget.budgetapi.domain.repository;
 
-import com.dailybudget.budgetapi.domain.models.User;
+import com.dailybudget.budgetapi.domain.models.UserInfo;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
 public interface UserRepository {
 
-    Mono<User> getById(UUID id);
+    Mono<UserInfo> getById(UUID id);
 
-    Mono<User> register(User user);
+    Mono<UserInfo> register(UserInfo userInfo);
 
 }

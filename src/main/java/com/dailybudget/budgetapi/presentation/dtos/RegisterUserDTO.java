@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Data
 public class RegisterUserDTO implements DTO{
-    private UUID id;
+    private UUID id = UUID.randomUUID();
     private String name;
     private BigDecimal salary;
     private String savingRule;

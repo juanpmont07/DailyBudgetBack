@@ -1,6 +1,6 @@
 package com.dailybudget.budgetapi.infrastructure.adapters.mappers;
 
-import com.dailybudget.budgetapi.domain.models.User;
+import com.dailybudget.budgetapi.domain.models.UserInfo;
 import com.dailybudget.budgetapi.presentation.dtos.RegisterUserDTO;
 import com.dailybudget.budgetapi.presentation.dtos.UserDTO;
 import org.springframework.stereotype.Component;
@@ -8,21 +8,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
 
-    public User toEntity(RegisterUserDTO dto) {
-        User user = new User();
-        user.setId(dto.getId());
-        user.setName(dto.getName());
-        user.setSalary(dto.getSalary());
-        user.setSavingRule(dto.getSavingRule());
-        return user;
+    public UserInfo toEntity(RegisterUserDTO dto) {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId(dto.getId());
+        userInfo.setName(dto.getName());
+        userInfo.setSalary(dto.getSalary());
+        userInfo.setSavingRule(dto.getSavingRule());
+        return userInfo;
     }
 
-    public UserDTO toDTO(User user) {
+    public UserDTO toDTO(UserInfo userInfo) {
         UserDTO userDto = new UserDTO();
-        userDto.setId(user.getId());
-        userDto.setName(user.getName());
-        userDto.setSalary(user.getSalary());
-        userDto.setSavingRule(user.getSavingRule());
+        userDto.setId(userInfo.getId());
+        userDto.setName(userInfo.getName());
+        userDto.setSalary(userInfo.getSalary());
+        userDto.setSavingRule(userInfo.getSavingRule());
         return userDto;
     }
 

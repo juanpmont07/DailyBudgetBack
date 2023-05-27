@@ -27,6 +27,11 @@ public class UserController {
         return Mono.just("1.0.0");
     }
 
+    @GetMapping("/login")
+    public Mono<ResponseEntity<String>> loginUser() {
+        return Mono.just( ResponseEntity.status(HttpStatus.ACCEPTED).body("aquiiiii muchos usuarios"));
+    }
+
     @PostMapping("/register")
     public Mono<ResponseEntity<ResponseDTO>> registerUser(@RequestBody RegisterUserDTO registerUserDTO) {
          return createUser.execute(registerUserDTO)

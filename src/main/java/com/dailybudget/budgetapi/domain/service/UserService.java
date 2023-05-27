@@ -1,6 +1,6 @@
 package com.dailybudget.budgetapi.domain.service;
 
-import com.dailybudget.budgetapi.domain.models.User;
+import com.dailybudget.budgetapi.domain.models.UserInfo;
 import com.dailybudget.budgetapi.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,11 +18,11 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Mono<User> register(User user){
-       return userRepository.register(user);
+    public Mono<UserInfo> register(UserInfo userInfo){
+       return userRepository.register(userInfo);
     }
 
-    public Mono<User> getById(UUID id){
+    public Mono<UserInfo> getById(UUID id){
         return userRepository.getById(id);
     }
 }
