@@ -1,27 +1,26 @@
-package com.dailybudget.budgetapi.application.command;
+package com.dailybudget.budgetapi.application.command.user;
 
-import com.dailybudget.budgetapi.application.service.user.RegisterUser;
+import com.dailybudget.budgetapi.application.command.Command;
+import com.dailybudget.budgetapi.application.service.user.UserService;
 import com.dailybudget.budgetapi.infrastructure.adapters.mappers.UserInfoMapper;
 import com.dailybudget.budgetapi.presentation.dtos.user.RegisterUserDTO;
 import com.dailybudget.budgetapi.presentation.dtos.user.UserInfoDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
-public class CreateUser implements Command<RegisterUserDTO, UserInfoDTO>{
+@RequiredArgsConstructor
+public class CreateUserInfo implements Command<RegisterUserDTO, UserInfoDTO> {
 
     @Autowired
     private UserInfoMapper userInfoMapper;
-
-    private final RegisterUser registerUser;
     @Autowired
-    public CreateUser(RegisterUser registerUser) {
-        this.registerUser = registerUser;
-    }
+    private final UserService userService;
 
     @Override
     public Mono<UserInfoDTO> execute(RegisterUserDTO registerUserDTO){
-       return registerUser.register(userInfoMapper.toEntity(registerUserDTO)).map(user -> userInfoMapper.toDTO(user));
+       return userService.registerUserInfo(userInfoMapper.toEntity(registerUserDTO)).map(user -> userInfoMapper.toDTO(user));
    }
 }

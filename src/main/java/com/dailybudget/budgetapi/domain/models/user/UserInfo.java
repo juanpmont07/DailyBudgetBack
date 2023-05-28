@@ -1,4 +1,4 @@
-package com.dailybudget.budgetapi.domain.models;
+package com.dailybudget.budgetapi.domain.models.user;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -18,5 +18,6 @@ public class UserInfo {
 
     @Column(name = "saving_rule")
     private String savingRule;
-
+    @Column(name = "user_type")
+    private String userType;
 }

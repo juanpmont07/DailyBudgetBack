@@ -1,40 +1,52 @@
 package com.dailybudget.budgetapi.infrastructure.adapters.controllers;
 
-import com.dailybudget.budgetapi.application.command.CreateUser;
-import com.dailybudget.budgetapi.presentation.dtos.RegisterUserDTO;
+import com.dailybudget.budgetapi.application.command.user.CreateUserLogin;
+import com.dailybudget.budgetapi.application.command.user.CreateUserInfo;
+import com.dailybudget.budgetapi.presentation.dtos.user.RegisterLoginDTO;
+import com.dailybudget.budgetapi.presentation.dtos.user.RegisterUserDTO;
 import com.dailybudget.budgetapi.presentation.dtos.ResponseDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class UserController {
 
-
-    private final CreateUser createUser;
+    @Autowired
+    private final CreateUserInfo createUserInfo;
 
     @Autowired
-    public UserController (CreateUser createUser){
-        this.createUser = createUser;
-    }
+    private final CreateUserLogin createUserLogin;
 
     @GetMapping
     public Mono<String> version(){
         return Mono.just("1.0.0");
     }
 
+    @PostMapping("/login")
+    public Mono<ResponseEntity<ResponseDTO>> registerLogin(@RequestBody RegisterLoginDTO loginUserDTO) {
+        return createUserLogin.execute(loginUserDTO)
+                .map(login->
+                     ResponseEntity.status(HttpStatus.CREATED).body(new ResponseDTO(login))
+                ).onErrorResume(throwable -> {
+                    String errorMessage = throwable.getMessage();
+                    return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseDTO(errorMessage)));
+                });
+    }
+
     @GetMapping("/login")
-    public Mono<ResponseEntity<String>> loginUser() {
-        return Mono.just( ResponseEntity.status(HttpStatus.ACCEPTED).body("aquiiiii muchos usuarios"));
+    public Mono<ResponseEntity<String>> validateLogin(@RequestBody RegisterLoginDTO loginUserDTO) {
+        return Mono.just( ResponseEntity.status(HttpStatus.ACCEPTED).body("se valida login"));
     }
 
     @PostMapping("/register")
     public Mono<ResponseEntity<ResponseDTO>> registerUser(@RequestBody RegisterUserDTO registerUserDTO) {
-         return createUser.execute(registerUserDTO)
+         return createUserInfo.execute(registerUserDTO)
                  .map(user -> ResponseEntity.status(HttpStatus.CREATED).body(new ResponseDTO(user)))
                  .onErrorResume(throwable -> {
                      String errorMessage = throwable.getMessage();
