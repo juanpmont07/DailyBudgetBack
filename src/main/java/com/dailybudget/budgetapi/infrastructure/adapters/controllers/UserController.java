@@ -31,8 +31,7 @@ public class UserController {
     @PostMapping("/login")
     public Mono<ResponseEntity<ResponseDTO>> registerLogin(@RequestBody RegisterLoginDTO loginUserDTO) {
         return createUserLogin.execute(loginUserDTO)
-                .map(login->
-                     ResponseEntity.status(HttpStatus.CREATED).body(new ResponseDTO(login))
+                .map(login->ResponseEntity.status(HttpStatus.CREATED).body(new ResponseDTO(login))
                 ).onErrorResume(throwable -> {
                     String errorMessage = throwable.getMessage();
                     return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseDTO(errorMessage)));

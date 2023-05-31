@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
-import java.util.UUID;
-
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -27,13 +25,14 @@ public class UserService {
 
     public Mono<UserLogin> registerUserLogin(UserLogin userLogin){
         return userServiceD.getUserInfoById(userLogin.getUserId())
+                .switchIfEmpty(Mono.error(new DomainException("User not is register in the application")))
                 .flatMap(userInfo->userServiceD.registerUserLogin(userLogin)
                         .map(userLoginR->{
-                            userLoginR.setUserInfo(userInfo);
+                                userLoginR.setUserInfo(userInfo);
                             return userLoginR;
                         })
-                .switchIfEmpty(Mono.error(new DomainException("User not is register in the application"))
-                .cast(UserLogin.class)));
+                .onErrorMap(throwable -> new DomainException("Error registering the login data", throwable))
+                .cast(UserLogin.class));
     }
 
 }
