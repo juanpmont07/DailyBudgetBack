@@ -6,16 +6,15 @@ CREATE TABLE UserInfo (
     id UUID PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     salary DECIMAL(10,2) NOT NULL,
-    saving_rule VARCHAR(50)
+    saving_rule VARCHAR(50),
+    user_type VARCHAR(30)
 );
 
 CREATE TABLE UserLogin (
-    id UUID PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(100) NOT NULL,
-    user_id UUID REFERENCES UserInfo(id)
+    user_id UUID PRIMARY KEY REFERENCES UserInfo(id),
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(100) NOT NULL
 );
-
 
 CREATE TABLE Category (
     id UUID PRIMARY KEY,

@@ -1,4 +1,4 @@
-package com.dailybudget.budgetapi.domain.models;
+package com.dailybudget.budgetapi.domain.models.user;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -9,15 +9,15 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name = "userinfo")
-public class User {
+public class UserInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String name;
     private BigDecimal salary;
 
     @Column(name = "saving_rule")
     private String savingRule;
-
+    @Column(name = "user_type")
+    private String userType;
 }
