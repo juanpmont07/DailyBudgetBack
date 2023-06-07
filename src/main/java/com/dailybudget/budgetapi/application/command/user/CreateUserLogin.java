@@ -15,12 +15,12 @@ import reactor.core.publisher.Mono;
 public class CreateUserLogin implements Command<RegisterLoginDTO, UserLoginDTO> {
 
     @Autowired
-    private UserLoginMapper userInfoMapper;
+    private final UserLoginMapper userLoginMapper;
     @Autowired
     private final UserService registerLogin;
 
     @Override
     public Mono<UserLoginDTO> execute(RegisterLoginDTO dto) {
-        return registerLogin.registerUserLogin(userInfoMapper.toEntity(dto)).map(user -> userInfoMapper.toDTO(user));
+        return registerLogin.registerUserLogin(userLoginMapper.toEntity(dto)).map(userLoginMapper::toDTO);
     }
 }

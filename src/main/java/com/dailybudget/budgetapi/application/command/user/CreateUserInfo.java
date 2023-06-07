@@ -15,12 +15,12 @@ import reactor.core.publisher.Mono;
 public class CreateUserInfo implements Command<RegisterUserDTO, UserInfoDTO> {
 
     @Autowired
-    private UserInfoMapper userInfoMapper;
+    private final UserInfoMapper userInfoMapper;
     @Autowired
     private final UserService userService;
 
     @Override
     public Mono<UserInfoDTO> execute(RegisterUserDTO registerUserDTO){
-       return userService.registerUserInfo(userInfoMapper.toEntity(registerUserDTO)).map(user -> userInfoMapper.toDTO(user));
+       return userService.registerUserInfo(userInfoMapper.toEntity(registerUserDTO)).map(userInfoMapper::toDTO);
    }
 }

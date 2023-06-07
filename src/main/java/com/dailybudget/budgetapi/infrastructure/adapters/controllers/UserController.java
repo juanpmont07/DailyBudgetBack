@@ -19,7 +19,6 @@ public class UserController {
 
     @Autowired
     private final CreateUserInfo createUserInfo;
-
     @Autowired
     private final CreateUserLogin createUserLogin;
 
