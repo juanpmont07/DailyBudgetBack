@@ -60,6 +60,7 @@ docker run daily-budget-postgres-img
 
 ARQUITECTURA
 
+Crear diagramas de secuencia en https://sequencediagram.org/
 
 HEXAGONAL, 
 CQS
