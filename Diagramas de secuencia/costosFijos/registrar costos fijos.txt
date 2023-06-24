@@ -1,0 +1,17 @@
+title Registrar costos fijos
+
+app->usuario: Consultar usuario
+usuario->app: Usuario consultado
+app->presupuesto: Registrar lista costos
+presupuesto->base_de_datos: Obtener costos actuales
+base_de_datos->presupuesto: Lista costos fijos
+loop por cada costo nuevo
+    presupuesto->presupuesto: Validar costo
+    alt si existe
+    presupuesto->Usuario: Costo ya registrada
+    else si no existe
+    presupuesto->base de datos: Se registra nuevo costo
+end
+end
+presupuesto->usuario: Costos creados
+usuario->app: Registrado exitosamente
