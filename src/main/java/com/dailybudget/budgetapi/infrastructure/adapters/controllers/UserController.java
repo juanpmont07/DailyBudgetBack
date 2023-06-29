@@ -27,16 +27,6 @@ public class UserController {
         return Mono.just("1.0.0");
     }
 
-    @PostMapping("/login")
-    public Mono<ResponseEntity<ResponseDTO>> registerLogin(@RequestBody RegisterLoginDTO loginUserDTO) {
-        return createUserLogin.execute(loginUserDTO)
-                .map(login->ResponseEntity.status(HttpStatus.CREATED).body(new ResponseDTO(login))
-                ).onErrorResume(throwable -> {
-                    String errorMessage = throwable.getMessage();
-                    return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseDTO(errorMessage)));
-                });
-    }
-
     @GetMapping("/login")
     public Mono<ResponseEntity<String>> validateLogin(@RequestBody RegisterLoginDTO loginUserDTO) {
         return Mono.just( ResponseEntity.status(HttpStatus.ACCEPTED).body("se valida login"));
@@ -45,11 +35,22 @@ public class UserController {
     @PostMapping("/register")
     public Mono<ResponseEntity<ResponseDTO>> registerUser(@RequestBody RegisterUserDTO registerUserDTO) {
          return createUserInfo.execute(registerUserDTO)
-                 .map(user -> ResponseEntity.status(HttpStatus.CREATED).body(new ResponseDTO(user)))
+                 .flatMap(user -> {
+                     RegisterLoginDTO loginUserDTO = new RegisterLoginDTO();
+                     loginUserDTO.setUserId(user.getId());
+                     loginUserDTO.setUsername(registerUserDTO.getUsername());
+                     loginUserDTO.setPassword(registerUserDTO.getPassword());
+
+                     return createUserLogin.execute(loginUserDTO)
+                             .map(login->ResponseEntity.status(HttpStatus.CREATED).body(new ResponseDTO(user, login))
+                             ).onErrorResume(throwable -> {
+                                 String errorMessage = throwable.getMessage();
+                                 return Mono.just(ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseDTO(errorMessage)));
+                             });
+                 })
                  .onErrorResume(throwable -> {
                      String errorMessage = throwable.getMessage();
-                     HttpStatus errorStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-                     return Mono.just(ResponseEntity.status(errorStatus).body(new ResponseDTO(errorMessage)));
+                     return Mono.just(ResponseEntity.status( HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseDTO(errorMessage)));
                  });
     }
 
