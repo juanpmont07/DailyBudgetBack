@@ -4,8 +4,6 @@ import com.dailybudget.budgetapi.presentation.dtos.DTO;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface Command<P extends DTO, T> {
-
-   Mono<T> execute(P dto);
+public interface CommandFlux<P extends DTO, T> {
+    Mono<T> execute(Flux<P> dto);
 }
-
