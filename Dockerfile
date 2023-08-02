@@ -6,4 +6,4 @@ ENV POSTGRES_DB DailyBudget
 
 COPY src/main/resources/daily_budget.sql /docker-entrypoint-initdb.d/
 
-EXPOSE 7171
+EXPOSE 5432
