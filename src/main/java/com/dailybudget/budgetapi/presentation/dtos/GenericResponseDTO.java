@@ -6,4 +6,8 @@ import lombok.Data;
 public class GenericResponseDTO implements DTO{
     private String message;
     private String errorMessage;
+
+    public GenericResponseDTO(String message) {
+        this.message = message;
+    }
 }

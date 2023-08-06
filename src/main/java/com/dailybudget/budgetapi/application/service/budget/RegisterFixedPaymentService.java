@@ -17,6 +17,6 @@ public class RegisterFixedPaymentService {
     private final FixedPaymentService fixedPaymentService;
 
     public Flux<FixedPayment> register(Flux<FixedPayment> fixedPayments, UUID userId){
-      return   fixedPaymentService.removeDuplicates(fixedPayments, userId).flatMap(fixedPaymentService::register);
+      return fixedPaymentService.removeDuplicates(fixedPayments, userId).flatMap(fixedPaymentService::register);
     }
 }

@@ -1,9 +1,7 @@
 package com.dailybudget.budgetapi.domain.service;
 
 import com.dailybudget.budgetapi.domain.models.budget.FixedPayment;
-import com.dailybudget.budgetapi.domain.models.user.UserInfo;
 import com.dailybudget.budgetapi.domain.repository.user.FixedPaymentRepository;
-import com.dailybudget.budgetapi.domain.repository.user.UserInfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
