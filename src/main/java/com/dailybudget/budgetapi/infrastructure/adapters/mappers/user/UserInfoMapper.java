@@ -1,4 +1,4 @@
-package com.dailybudget.budgetapi.infrastructure.adapters.mappers;
+package com.dailybudget.budgetapi.infrastructure.adapters.mappers.user;
 
 import com.dailybudget.budgetapi.domain.models.user.UserInfo;
 import com.dailybudget.budgetapi.presentation.dtos.user.RegisterUserDTO;

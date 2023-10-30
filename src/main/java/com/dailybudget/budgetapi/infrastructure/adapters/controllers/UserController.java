@@ -54,7 +54,7 @@ public class UserController {
                  });
     }
 
-    @GetMapping("/users")
+    @GetMapping("/all")
     public Mono<ResponseEntity<String>> getUserAll() {
         return Mono.just( ResponseEntity.status(HttpStatus.ACCEPTED).body("aquiiiii muchos usuarios"));
     }
