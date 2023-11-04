@@ -15,7 +15,6 @@ public class UserInfo {
     private UUID id;
     private String name;
     private BigDecimal salary;
-
     @Column(name = "saving_rule")
     private String savingRule;
     @Column(name = "user_type")

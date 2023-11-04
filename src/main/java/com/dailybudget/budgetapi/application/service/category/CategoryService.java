@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -26,8 +27,8 @@ public class CategoryService {
                 .flatMap(userInfo -> categoryDomainService.registerCategory(category));
     }
 
-    public Mono<Category> getCategoryByUserId(UUID categoryId){
-        return categoryDomainService.getCategoryById(categoryId)
+    public Mono<List<Category>> getCategoryByUserId(UUID categoryId){
+        return categoryDomainService.getCategoryByUserId(categoryId)
                 .switchIfEmpty(Mono.error(new DomainException("The category is not register"))) ;
     }
 

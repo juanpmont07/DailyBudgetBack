@@ -13,7 +13,7 @@ public class CategoryMapper {
         Category category = new Category();
         category.setId(dto.getId());
         category.setName(dto.getName());
-        category.setUserInfo((new UserInfo()));
+        category.setUserInfo(new UserInfo());
         category.getUserInfo().setId(dto.getUserId());
         return category;
     }

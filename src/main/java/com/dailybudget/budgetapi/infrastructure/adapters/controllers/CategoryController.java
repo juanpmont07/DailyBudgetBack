@@ -29,7 +29,7 @@ public class CategoryController {
                 .map(categoryDTO -> ResponseEntity.status(HttpStatus.CREATED).body(new ResponseDTO(categoryDTO)))
                 .onErrorResume(throwable -> {
                     String errorMessage = throwable.getMessage();
-                    return Mono.just(ResponseEntity.status( HttpStatus.BAD_REQUEST).body(new ResponseDTO(errorMessage)));
+                    return Mono.just(ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDTO(errorMessage)));
                 });
     }
 }

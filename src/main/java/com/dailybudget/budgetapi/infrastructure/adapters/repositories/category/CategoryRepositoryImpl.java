@@ -20,15 +20,16 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     private final CategoryJpaRepository categoryJpaRepository;
 
     @Override
-    public Mono<List<Category>> getByUserId(UUID id) {
-        List<Category> categories = categoryJpaRepository.findByUserId(id);
-        return categories.isEmpty() ? Mono.error(new DomainException("The client not has categories"))
-                : Mono.just(categories);
-    }
-
-    @Override
     public Mono<Category> register(Category category) {
         return Mono.fromCallable(()->categoryJpaRepository.save(category))
                 .onErrorMap(ex->new DomainException("Error registering the category",ex));
     }
+
+    @Override
+    public Mono<List<Category>> getByUserId(UUID id) {
+        List<Category> categories = categoryJpaRepository.findByUserInfoId(id);
+        return categories.isEmpty() ? Mono.error(new DomainException("The client not has categories"))
+                : Mono.just(categories);
+    }
+
 }
