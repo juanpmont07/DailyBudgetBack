@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,22 +20,15 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     private final CategoryJpaRepository categoryJpaRepository;
 
     @Override
-    public Mono<Category> getById(UUID id) {
-        Optional<Category> categoryOptional = categoryJpaRepository.findById(id);
-        if (categoryOptional.isPresent()) {
-            return Mono.just(categoryOptional.get());
-        } else {
-            return Mono.empty();
-        }
+    public Mono<List<Category>> getByUserId(UUID id) {
+        List<Category> categories = categoryJpaRepository.findByUserId(id);
+        return categories.isEmpty() ? Mono.error(new DomainException("The client not has categories"))
+                : Mono.just(categories);
     }
 
     @Override
     public Mono<Category> register(Category category) {
-        try {
-            Category savedCategory = categoryJpaRepository.save(category);
-            return Mono.just(savedCategory);
-        } catch (Exception ex) {
-            return Mono.error(new DomainException("Error registering the category", ex));
-        }
+        return Mono.fromCallable(()->categoryJpaRepository.save(category))
+                .onErrorMap(ex->new DomainException("Error registering the category",ex));
     }
 }

@@ -14,8 +14,6 @@ public class Category {
     @Id
     private UUID id;
     private String name;
-    @Column(name = "user_id")
-    private UUID userId;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)

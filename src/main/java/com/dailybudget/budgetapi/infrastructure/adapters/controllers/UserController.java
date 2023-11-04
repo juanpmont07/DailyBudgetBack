@@ -29,7 +29,7 @@ public class UserController {
 
     @GetMapping("/login")
     public Mono<ResponseEntity<String>> validateLogin(@RequestBody RegisterLoginDTO loginUserDTO) {
-        return Mono.just( ResponseEntity.status(HttpStatus.ACCEPTED).body("se valida login"));
+        return Mono.just(ResponseEntity.status(HttpStatus.ACCEPTED).body("se valida login"));
     }
 
     @PostMapping("/register")
