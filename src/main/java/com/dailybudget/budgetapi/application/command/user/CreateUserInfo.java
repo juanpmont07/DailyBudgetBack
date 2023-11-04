@@ -2,7 +2,7 @@ package com.dailybudget.budgetapi.application.command.user;
 
 import com.dailybudget.budgetapi.application.command.Command;
 import com.dailybudget.budgetapi.application.service.user.UserService;
-import com.dailybudget.budgetapi.infrastructure.adapters.mappers.UserInfoMapper;
+import com.dailybudget.budgetapi.infrastructure.adapters.mappers.user.UserInfoMapper;
 import com.dailybudget.budgetapi.presentation.dtos.user.RegisterUserDTO;
 import com.dailybudget.budgetapi.presentation.dtos.user.UserInfoDTO;
 import lombok.RequiredArgsConstructor;
