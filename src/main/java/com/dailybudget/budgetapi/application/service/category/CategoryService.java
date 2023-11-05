@@ -4,6 +4,7 @@ import com.dailybudget.budgetapi.domain.exceptions.DomainException;
 import com.dailybudget.budgetapi.domain.models.category.Category;
 import com.dailybudget.budgetapi.domain.service.category.CategoryDomainService;
 import com.dailybudget.budgetapi.domain.service.user.UserInfoService;
+import com.dailybudget.budgetapi.domain.utils.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,13 +24,13 @@ public class CategoryService {
 
     public Mono<Category> registerCategory(Category category){
         return userInfoService.getUserInfoById(category.getUserInfo().getId())
-                .switchIfEmpty(Mono.error(new DomainException("User is not register")))
+                .switchIfEmpty(Mono.error(new DomainException(ErrorCode.USER_WAS_NOT_FOUND)))
                 .flatMap(userInfo -> categoryDomainService.registerCategory(category));
     }
 
     public Mono<List<Category>> getCategoryByUserId(UUID categoryId){
         return categoryDomainService.getCategoryByUserId(categoryId)
-                .switchIfEmpty(Mono.error(new DomainException("The category is not register"))) ;
+                .switchIfEmpty(Mono.error(new DomainException(ErrorCode.CATEGORY_WAS_NOT_REGISTERED))) ;
     }
 
 }

@@ -3,6 +3,7 @@ package com.dailybudget.budgetapi.infrastructure.adapters.repositories.user;
 import com.dailybudget.budgetapi.domain.exceptions.DomainException;
 import com.dailybudget.budgetapi.domain.models.user.UserInfo;
 import com.dailybudget.budgetapi.domain.repository.user.UserInfoRepository;
+import com.dailybudget.budgetapi.domain.utils.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,13 +21,14 @@ public class UserInfoRepositoryImpl implements UserInfoRepository {
 
     @Override
     public Mono<UserInfo> getById(UUID id) {
-        Optional<UserInfo> userOptional = userInfoJpaRepository.findById(id);
-        return userOptional.map(Mono::just).orElseGet(Mono::empty);
+        return Mono.fromCallable(()->userInfoJpaRepository.findById(id))
+                .map(Optional::get)
+                .onErrorMap(ex->new DomainException(ErrorCode.ERROR_CONSULTING_THE_USER, ex));
     }
 
     @Override
     public Mono<UserInfo> register(UserInfo userInfo) {
         return Mono.fromCallable(()->userInfoJpaRepository.save(userInfo))
-                .onErrorMap(ex->new DomainException("Error registering the user",ex));
+                .onErrorMap(ex->new DomainException(ErrorCode.USER_WAS_NOT_REGISTERED, ex));
     }
 }
