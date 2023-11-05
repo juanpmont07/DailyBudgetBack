@@ -13,7 +13,7 @@ public class ResponseDTO implements DTO{
     private String message;
 
     public ResponseDTO(DTO... dto) {
-        this.dto = Arrays.asList(dto);;
+        this.dto = Arrays.asList(dto);
     }
 
     public ResponseDTO(String message) {
