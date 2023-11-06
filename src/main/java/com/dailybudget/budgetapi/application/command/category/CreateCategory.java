@@ -21,7 +21,6 @@ public class CreateCategory implements Command<RegisterCategoryDTO, CategoryDTO>
 
     @Override
     public Mono<CategoryDTO> execute(RegisterCategoryDTO dto) {
-        return categoryService.registerCategory(categoryMapper.toDomain(dto))
-                .map(categoryMapper::toDTO);
+        return categoryService.registerCategory(categoryMapper.toDomain(dto));
     }
 }

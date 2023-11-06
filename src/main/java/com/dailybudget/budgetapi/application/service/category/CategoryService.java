@@ -3,9 +3,10 @@ package com.dailybudget.budgetapi.application.service.category;
 import com.dailybudget.budgetapi.domain.exceptions.DomainException;
 import com.dailybudget.budgetapi.domain.models.category.Category;
 import com.dailybudget.budgetapi.domain.service.category.CategoryDomainService;
-import com.dailybudget.budgetapi.domain.service.user.UserInfoService;
+import com.dailybudget.budgetapi.domain.service.user.UserInfoDomainService;
 import com.dailybudget.budgetapi.domain.utils.ErrorCode;
-import com.dailybudget.budgetapi.infrastructure.adapters.entities.catagory.CategoryEntity;
+import com.dailybudget.budgetapi.presentation.dtos.category.CategoryDTO;
+import com.dailybudget.budgetapi.presentation.dtos.category.ConsultCategoryDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,17 +20,17 @@ import java.util.UUID;
 public class CategoryService {
 
     @Autowired
-    public UserInfoService userInfoService;
+    public UserInfoDomainService userInfoDomainService;
     @Autowired
     public CategoryDomainService categoryDomainService;
 
-    public Mono<CategoryEntity> registerCategory(Category category){
-        return userInfoService.getUserInfoById(category.getUserId())
+    public Mono<CategoryDTO> registerCategory(Category category){
+        return userInfoDomainService.getUserInfoById(category.getUserId())
                 .switchIfEmpty(Mono.error(new DomainException(ErrorCode.USER_WAS_NOT_FOUND)))
                 .flatMap(userInfo -> categoryDomainService.registerCategory(category));
     }
 
-    public Mono<List<CategoryEntity>> getCategoryByUserId(UUID categoryId){
+    public Mono<List<ConsultCategoryDTO>> getCategoryByUserId(UUID categoryId){
         return categoryDomainService.getCategoryByUserId(categoryId)
                 .switchIfEmpty(Mono.error(new DomainException(ErrorCode.CATEGORY_WAS_NOT_REGISTERED))) ;
     }

@@ -2,8 +2,6 @@ package com.dailybudget.budgetapi.application.query.category;
 
 import com.dailybudget.budgetapi.application.query.Query;
 import com.dailybudget.budgetapi.application.service.category.CategoryService;
-import com.dailybudget.budgetapi.infrastructure.adapters.mappers.category.CategoryMapper;
-import com.dailybudget.budgetapi.presentation.dtos.category.CategoryDTO;
 import com.dailybudget.budgetapi.presentation.dtos.category.ConsultCategoryDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +16,10 @@ import java.util.UUID;
 public class ConsultCategory implements Query<List<ConsultCategoryDTO>, UUID> {
 
     @Autowired
-    private final CategoryMapper categoryMapper;
-    @Autowired
     private final CategoryService categoryService;
 
     @Override
     public Mono<List<ConsultCategoryDTO>> execute(UUID userId) {
-        return categoryService.getCategoryByUserId(userId).map(categoryMapper::toListDTO);
+        return categoryService.getCategoryByUserId(userId);
     }
 }
