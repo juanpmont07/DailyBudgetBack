@@ -15,19 +15,23 @@ public class CategoryMapper {
 
     public Category toEntity(RegisterCategoryDTO dto) {
         Category category = new Category();
-        category.setId(dto.getId());
-        category.setName(dto.getName());
-        category.setUserInfo(new UserInfo());
-        category.getUserInfo().setId(dto.getUserId());
+        if (dto!=null) {
+            category.setId(dto.getId());
+            category.setName(dto.getName());
+            category.setUserInfo(new UserInfo());
+            category.getUserInfo().setId(dto.getUserId());
+        }
         return category;
     }
 
     public CategoryDTO toDTO(Category category) {
         CategoryDTO categoryDTO = new CategoryDTO();
-        categoryDTO.setIdCategory(category.getId());
-        categoryDTO.setCategoryName(category.getName());
-        categoryDTO.setUserName(category.getUserInfo().getName());
-        categoryDTO.setSavingRule(category.getUserInfo().getSavingRule());
+        if(category!=null) {
+            categoryDTO.setIdCategory(category.getId());
+            categoryDTO.setCategoryName(category.getName());
+            categoryDTO.setUserName(category.getUserInfo().getName());
+            categoryDTO.setSavingRule(category.getUserInfo().getSavingRule());
+        }
         return categoryDTO;
     }
 
