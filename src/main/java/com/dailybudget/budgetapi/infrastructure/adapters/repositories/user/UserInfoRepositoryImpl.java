@@ -21,8 +21,9 @@ public class UserInfoRepositoryImpl implements UserInfoRepository {
     @Override
     public Mono<UserInfo> getById(UUID id) {
         return Mono.fromCallable(()->userInfoJpaRepository.findById(id))
+                .onErrorMap(ex->new DomainException(ErrorCode.ERROR_CONSULTING_THE_USER, ex))
                 .flatMap(userInfo ->
-                    userInfo.map(Mono::just).orElse(Mono.empty())
+                        userInfo.map(Mono::just).orElse(Mono.empty())
                 );
     }
 

@@ -1,21 +1,34 @@
 package com.dailybudget.budgetapi.domain.models.category;
 
-import com.dailybudget.budgetapi.domain.models.user.UserInfo;
-import jakarta.persistence.*;
-import lombok.Data;
-
 import java.util.UUID;
 
-@Data
-@Entity
-@Table(name = "category")
 public class Category {
 
-    @Id
     private UUID id;
     private String name;
+    private UUID userId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", updatable = false)
-    private UserInfo userInfo;
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public UUID getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UUID userId) {
+        this.userId = userId;
+    }
 }

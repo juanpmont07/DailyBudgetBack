@@ -4,6 +4,8 @@ import com.dailybudget.budgetapi.domain.exceptions.DomainException;
 import com.dailybudget.budgetapi.domain.models.category.Category;
 import com.dailybudget.budgetapi.domain.repository.category.CategoryRepository;
 import com.dailybudget.budgetapi.domain.utils.ErrorCode;
+import com.dailybudget.budgetapi.infrastructure.adapters.entities.catagory.CategoryEntity;
+import com.dailybudget.budgetapi.infrastructure.adapters.mappers.category.CategoryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,14 +21,18 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     @Autowired
     private final CategoryJpaRepository categoryJpaRepository;
 
+    @Autowired
+    private final CategoryMapper categoryMapper;
+
+
     @Override
-    public Mono<Category> register(Category category) {
-        return Mono.fromCallable(()->categoryJpaRepository.save(category))
+    public Mono<CategoryEntity> register(Category category) {
+        return Mono.fromCallable(()->categoryJpaRepository.save(categoryMapper.toEntity(category)))
                 .onErrorMap(ex->new DomainException(ErrorCode.CATEGORY_WAS_NOT_REGISTERED,ex));
     }
 
     @Override
-    public Mono<List<Category>> getByUserId(UUID id) {
+    public Mono<List<CategoryEntity>> getByUserId(UUID id) {
         return Mono.fromCallable(()->categoryJpaRepository.findByUserInfoId(id))
                 .switchIfEmpty(Mono.empty())
                 .onErrorMap(ex->new DomainException(ErrorCode.CATEGORY_NOT_FOUND,ex));
