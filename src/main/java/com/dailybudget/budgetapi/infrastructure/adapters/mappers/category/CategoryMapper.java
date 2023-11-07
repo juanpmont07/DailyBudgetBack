@@ -17,7 +17,6 @@ public class CategoryMapper {
     public Category toDomain(RegisterCategoryDTO dto) {
         Category category = new Category();
         if (dto!=null) {
-            category.setId(dto.getId());
             category.setName(dto.getName());
             category.setUserId(dto.getUserId());
         }
@@ -27,7 +26,6 @@ public class CategoryMapper {
     public CategoryEntity toEntity(Category domain) {
         CategoryEntity categoryEntity = new CategoryEntity();
         if (domain!=null) {
-            categoryEntity.setId(domain.getId());
             categoryEntity.setName(domain.getName());
             categoryEntity.setUserInfo(new UserInfoEntity());
             categoryEntity.getUserInfo().setId(domain.getUserId());

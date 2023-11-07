@@ -12,7 +12,7 @@ import java.util.UUID;
 public class CategoryEntity {
 
     @Id
-    private UUID id;
+    private UUID id = UUID.randomUUID();
     private String name;
 
     @ManyToOne

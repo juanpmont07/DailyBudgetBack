@@ -7,7 +7,6 @@ import java.util.UUID;
 
 @Data
 public class ConsultCategoryDTO implements DTO {
-
     private UUID idCategory;
     private String categoryName;
 }

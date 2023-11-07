@@ -4,7 +4,6 @@ import com.dailybudget.budgetapi.application.command.category.CreateCategory;
 import com.dailybudget.budgetapi.application.query.category.ConsultCategory;
 import com.dailybudget.budgetapi.domain.exceptions.DomainException;
 import com.dailybudget.budgetapi.presentation.dtos.ResponseDTO;
-import com.dailybudget.budgetapi.presentation.dtos.category.CategoryDTO;
 import com.dailybudget.budgetapi.presentation.dtos.category.ConsultCategoryDTO;
 import com.dailybudget.budgetapi.presentation.dtos.category.RegisterCategoryDTO;
 import lombok.RequiredArgsConstructor;
