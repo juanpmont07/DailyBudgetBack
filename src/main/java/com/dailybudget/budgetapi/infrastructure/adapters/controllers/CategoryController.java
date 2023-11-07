@@ -37,7 +37,7 @@ public class CategoryController {
                 .map(categoryDTO -> ResponseEntity.status(HttpStatus.CREATED).body(new ResponseDTO(categoryDTO)))
                 .onErrorResume(DomainException.class, domainException ->
                         Mono.just(ResponseEntity.status(domainException.getErrorCode().getHttpStatus())
-                                .body(new ResponseDTO(domainException.getErrorCode().getMessage())))
+                                .body(new ResponseDTO(domainException)))
                 );
     }
 
@@ -48,7 +48,7 @@ public class CategoryController {
                         .body(new ResponseDTO(categories.toArray(new ConsultCategoryDTO[0]))))
                 .onErrorResume(DomainException.class, domainException ->
                         Mono.just(ResponseEntity.status(domainException.getErrorCode().getHttpStatus())
-                                .body(new ResponseDTO(domainException.getErrorCode().getMessage())))
+                                .body(new ResponseDTO(domainException)))
                 );
     }
 }

@@ -45,11 +45,11 @@ public class UserController {
                              .map(login->ResponseEntity.status(HttpStatus.CREATED).body(new ResponseDTO(user, login))
                              ).onErrorResume(DomainException.class, domainException ->
                                Mono.just(ResponseEntity.status(domainException.getErrorCode().getHttpStatus())
-                                   .body(new ResponseDTO(domainException.getErrorCode().getMessage())))
+                                   .body(new ResponseDTO(domainException)))
                              );
                  }).onErrorResume(DomainException.class, domainException ->
                          Mono.just(ResponseEntity.status(domainException.getErrorCode().getHttpStatus())
-                         .body(new ResponseDTO(domainException.getErrorCode().getMessage())))
+                         .body(new ResponseDTO(domainException)))
                  );
     }
 

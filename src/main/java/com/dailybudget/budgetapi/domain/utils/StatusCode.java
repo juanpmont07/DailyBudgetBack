@@ -2,7 +2,7 @@ package com.dailybudget.budgetapi.domain.utils;
 
 import org.springframework.http.HttpStatus;
 
-public enum ErrorCode {
+public enum StatusCode {
 
     USER_WAS_FOUND(HttpStatus.FOUND,"The client was found"),
     USER_WAS_NOT_FOUND(HttpStatus.NOT_FOUND,"The client was not found"),
@@ -14,7 +14,7 @@ public enum ErrorCode {
     private final HttpStatus httpStatus;
     private final String message;
 
-    ErrorCode(HttpStatus httpStatus, String message) {
+    StatusCode(HttpStatus httpStatus, String message) {
         this.httpStatus = httpStatus;
         this.message = message;
     }

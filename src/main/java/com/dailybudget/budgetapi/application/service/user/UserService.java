@@ -5,7 +5,7 @@ import com.dailybudget.budgetapi.domain.models.user.UserInfo;
 import com.dailybudget.budgetapi.domain.models.user.UserLogin;
 import com.dailybudget.budgetapi.domain.service.user.UserLoginDomainService;
 import com.dailybudget.budgetapi.domain.service.user.UserInfoDomainService;
-import com.dailybudget.budgetapi.domain.utils.ErrorCode;
+import com.dailybudget.budgetapi.domain.utils.StatusCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,14 +22,14 @@ public class UserService {
 
     public Mono<UserInfo> registerUserInfo(UserInfo userInfo){
        return  userInfoDomainService.getUserInfoById(userInfo.getId()).
-               flatMap(userExist -> Mono.error(new DomainException(ErrorCode.USER_WAS_FOUND))).
+               flatMap(userExist -> Mono.error(new DomainException(StatusCode.USER_WAS_FOUND))).
                switchIfEmpty(userInfoDomainService.registerUserInfo(userInfo))
                .cast(UserInfo.class);
     }
 
     public Mono<UserLogin> registerUserLogin(UserLogin userLogin){
         return userInfoDomainService.getUserInfoById(userLogin.getUserId())
-               .switchIfEmpty(Mono.error(new DomainException(ErrorCode.USER_WAS_NOT_FOUND)))
+               .switchIfEmpty(Mono.error(new DomainException(StatusCode.USER_WAS_NOT_FOUND)))
                .flatMap(userInfo-> userLoginDomainService.registerUserLogin(userLogin)
                    .map(userLoginR->{
                         userLoginR.setUserInfo(userInfo);

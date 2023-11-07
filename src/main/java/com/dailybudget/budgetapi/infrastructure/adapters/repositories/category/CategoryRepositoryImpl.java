@@ -3,7 +3,7 @@ package com.dailybudget.budgetapi.infrastructure.adapters.repositories.category;
 import com.dailybudget.budgetapi.domain.exceptions.DomainException;
 import com.dailybudget.budgetapi.domain.models.category.Category;
 import com.dailybudget.budgetapi.domain.repository.category.CategoryRepository;
-import com.dailybudget.budgetapi.domain.utils.ErrorCode;
+import com.dailybudget.budgetapi.domain.utils.StatusCode;
 import com.dailybudget.budgetapi.infrastructure.adapters.mappers.category.CategoryMapper;
 import com.dailybudget.budgetapi.presentation.dtos.category.CategoryDTO;
 import com.dailybudget.budgetapi.presentation.dtos.category.ConsultCategoryDTO;
@@ -30,7 +30,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     public Mono<CategoryDTO> register(Category category) {
         return Mono.fromCallable(()->categoryJpaRepository.save(categoryMapper.toEntity(category)))
                 .map(categoryMapper::toDTO)
-                .onErrorMap(ex->new DomainException(ErrorCode.CATEGORY_WAS_NOT_REGISTERED,ex));
+                .onErrorMap(ex->new DomainException(ex.getMessage(), StatusCode.CATEGORY_WAS_NOT_REGISTERED,ex));
     }
 
     @Override
@@ -38,7 +38,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         return Mono.fromCallable(()->categoryJpaRepository.findByUserInfoId(id))
                 .map(categoryMapper::toListDTO)
                 .switchIfEmpty(Mono.empty())
-                .onErrorMap(ex->new DomainException(ErrorCode.CATEGORY_NOT_FOUND,ex));
+                .onErrorMap(ex->new DomainException(ex.getMessage(), StatusCode.CATEGORY_NOT_FOUND,ex));
     }
 
 }

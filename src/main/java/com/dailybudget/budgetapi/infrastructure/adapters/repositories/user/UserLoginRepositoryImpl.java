@@ -3,7 +3,7 @@ package com.dailybudget.budgetapi.infrastructure.adapters.repositories.user;
 import com.dailybudget.budgetapi.domain.exceptions.DomainException;
 import com.dailybudget.budgetapi.domain.models.user.UserLogin;
 import com.dailybudget.budgetapi.domain.repository.user.UserLoginRepository;
-import com.dailybudget.budgetapi.domain.utils.ErrorCode;
+import com.dailybudget.budgetapi.domain.utils.StatusCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,6 +19,6 @@ public class UserLoginRepositoryImpl implements UserLoginRepository {
     @Override
     public Mono<UserLogin> register(UserLogin userLogin) {
         return Mono.fromCallable(()->userLoginJpaRepository.save(userLogin))
-                .onErrorMap(ex->new DomainException(ErrorCode.USER_WAS_NOT_REGISTERED,ex));
+                .onErrorMap(ex->new DomainException(ex.getMessage(), StatusCode.USER_WAS_NOT_REGISTERED,ex));
     }
 }

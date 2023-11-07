@@ -1,5 +1,6 @@
 package com.dailybudget.budgetapi.presentation.dtos;
 
+import com.dailybudget.budgetapi.domain.exceptions.DomainException;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -21,5 +22,10 @@ public class ResponseDTO implements DTO{
 
     public ResponseDTO(String message) {
         this.message = message;
+    }
+
+    public ResponseDTO(DomainException domainException) {
+        this.message = domainException.getErrorCode().getMessage()+
+                " : "+ domainException.getMessage();
     }
 }
