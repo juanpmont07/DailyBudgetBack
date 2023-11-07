@@ -7,7 +7,6 @@ import com.dailybudget.budgetapi.presentation.dtos.ResponseDTO;
 import com.dailybudget.budgetapi.presentation.dtos.category.ConsultCategoryDTO;
 import com.dailybudget.budgetapi.presentation.dtos.category.RegisterCategoryDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +19,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CategoryController {
 
-    @Autowired
     private final CreateCategory createCategory;
-
-    @Autowired
     private final ConsultCategory consultCategory;
 
     @GetMapping("/version")

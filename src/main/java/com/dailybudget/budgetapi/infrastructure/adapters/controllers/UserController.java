@@ -7,7 +7,6 @@ import com.dailybudget.budgetapi.presentation.dtos.user.RegisterLoginDTO;
 import com.dailybudget.budgetapi.presentation.dtos.user.RegisterUserDTO;
 import com.dailybudget.budgetapi.presentation.dtos.ResponseDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +17,7 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
     private final CreateUserInfo createUserInfo;
-    @Autowired
     private final CreateUserLogin createUserLogin;
 
     @GetMapping

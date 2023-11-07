@@ -4,7 +4,6 @@ import com.dailybudget.budgetapi.application.query.Query;
 import com.dailybudget.budgetapi.application.service.category.CategoryService;
 import com.dailybudget.budgetapi.presentation.dtos.category.ConsultCategoryDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -15,7 +14,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ConsultCategory implements Query<List<ConsultCategoryDTO>, UUID> {
 
-    @Autowired
     private final CategoryService categoryService;
 
     @Override
