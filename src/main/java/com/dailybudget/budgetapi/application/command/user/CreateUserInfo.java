@@ -21,6 +21,6 @@ public class CreateUserInfo implements Command<RegisterUserDTO, UserInfoDTO> {
 
     @Override
     public Mono<UserInfoDTO> execute(RegisterUserDTO registerUserDTO){
-       return userService.registerUserInfo(userInfoMapper.toEntity(registerUserDTO)).map(userInfoMapper::toDTO);
+       return userService.registerUserInfo(userInfoMapper.toDomain(registerUserDTO));
    }
 }

@@ -1,5 +1,6 @@
 package com.dailybudget.budgetapi.domain.models.user;
 
+import com.dailybudget.budgetapi.infrastructure.adapters.entities.user.UserInfoEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -18,5 +19,5 @@ public class UserLogin {
 
     @OneToOne
     @JoinColumn(name = "user_id")
-    private UserInfo userInfo;
+    private UserInfoEntity userInfo;
 }

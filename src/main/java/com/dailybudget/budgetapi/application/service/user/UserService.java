@@ -6,6 +6,8 @@ import com.dailybudget.budgetapi.domain.models.user.UserLogin;
 import com.dailybudget.budgetapi.domain.service.user.UserLoginDomainService;
 import com.dailybudget.budgetapi.domain.service.user.UserInfoDomainService;
 import com.dailybudget.budgetapi.domain.utils.StatusCode;
+import com.dailybudget.budgetapi.infrastructure.adapters.mappers.user.UserInfoMapper;
+import com.dailybudget.budgetapi.presentation.dtos.user.UserInfoDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,12 +21,13 @@ public class UserService {
     private final UserLoginDomainService userLoginDomainService;
     @Autowired
     private final UserInfoDomainService userInfoDomainService;
+    @Autowired
+    private final UserInfoMapper userInfoMapper;
 
-    public Mono<UserInfo> registerUserInfo(UserInfo userInfo){
-       return  userInfoDomainService.getUserInfoById(userInfo.getId()).
-               flatMap(userExist -> Mono.error(new DomainException(StatusCode.USER_WAS_FOUND))).
-               switchIfEmpty(userInfoDomainService.registerUserInfo(userInfo))
-               .cast(UserInfo.class);
+    public Mono<UserInfoDTO> registerUserInfo(UserInfo userInfo){
+       return userInfoDomainService.getUserInfoById(userInfo.getId())
+               .switchIfEmpty(userInfoDomainService.registerUserInfo(userInfo))
+               .onErrorResume(user->Mono.error(new DomainException(StatusCode.USER_WAS_FOUND)));
     }
 
     public Mono<UserLogin> registerUserLogin(UserLogin userLogin){
@@ -32,10 +35,10 @@ public class UserService {
                .switchIfEmpty(Mono.error(new DomainException(StatusCode.USER_WAS_NOT_FOUND)))
                .flatMap(userInfo-> userLoginDomainService.registerUserLogin(userLogin)
                    .map(userLoginR->{
-                        userLoginR.setUserInfo(userInfo);
+                        userLoginR.setUserInfo(userInfoMapper.toEntity(userInfo));
                         return userLoginR;
                    })
-               .cast(UserLogin.class));
+               );
     }
 
 }

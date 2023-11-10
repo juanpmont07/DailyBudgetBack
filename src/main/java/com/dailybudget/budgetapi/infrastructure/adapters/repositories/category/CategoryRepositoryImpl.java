@@ -36,8 +36,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     @Override
     public Mono<List<ConsultCategoryDTO>> getByUserId(UUID id) {
         return Mono.fromCallable(()->categoryJpaRepository.findByUserInfoId(id))
-                .map(categoryMapper::toListDTO)
-                .switchIfEmpty(Mono.empty())
+                .flatMap(category-> Mono.justOrEmpty(categoryMapper.toListDTO(category)))
                 .onErrorMap(ex->new DomainException(ex.getMessage(), StatusCode.CATEGORY_NOT_FOUND,ex));
     }
 

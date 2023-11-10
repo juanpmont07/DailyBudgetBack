@@ -5,6 +5,6 @@ import reactor.core.publisher.Mono;
 
 public interface UserLoginRepository {
 
-    Mono<UserLogin> register(UserLogin userInfo);
+    Mono<UserLogin> register(UserLogin userLogin);
 
 }
