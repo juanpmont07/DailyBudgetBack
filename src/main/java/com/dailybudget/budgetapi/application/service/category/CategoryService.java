@@ -24,7 +24,6 @@ public class CategoryService {
     public UserInfoDomainService userInfoDomainService;
     @Autowired
     public CategoryDomainService categoryDomainService;
-
     @Autowired
     public CategoryMapper categoryMapper;
 

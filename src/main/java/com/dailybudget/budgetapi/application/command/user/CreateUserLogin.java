@@ -6,7 +6,6 @@ import com.dailybudget.budgetapi.infrastructure.adapters.mappers.user.UserLoginM
 import com.dailybudget.budgetapi.presentation.dtos.user.UserLoginDTO;
 import com.dailybudget.budgetapi.presentation.dtos.user.RegisterLoginDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -14,9 +13,7 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class CreateUserLogin implements Command<RegisterLoginDTO, UserLoginDTO> {
 
-    @Autowired
     private final UserLoginMapper userLoginMapper;
-    @Autowired
     private final UserService registerLogin;
 
     @Override

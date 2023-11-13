@@ -6,7 +6,6 @@ import com.dailybudget.budgetapi.infrastructure.adapters.mappers.user.UserInfoMa
 import com.dailybudget.budgetapi.presentation.dtos.user.RegisterUserDTO;
 import com.dailybudget.budgetapi.presentation.dtos.user.UserInfoDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -14,9 +13,7 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class CreateUserInfo implements Command<RegisterUserDTO, UserInfoDTO> {
 
-    @Autowired
     private final UserInfoMapper userInfoMapper;
-    @Autowired
     private final UserService userService;
 
     @Override
