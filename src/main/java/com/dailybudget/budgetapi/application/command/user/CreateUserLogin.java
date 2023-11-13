@@ -21,6 +21,6 @@ public class CreateUserLogin implements Command<RegisterLoginDTO, UserLoginDTO> 
 
     @Override
     public Mono<UserLoginDTO> execute(RegisterLoginDTO dto) {
-        return registerLogin.registerUserLogin(userLoginMapper.toEntity(dto)).map(userLoginMapper::toDTO);
+        return registerLogin.registerUserLogin(userLoginMapper.toDomain(dto));
     }
 }

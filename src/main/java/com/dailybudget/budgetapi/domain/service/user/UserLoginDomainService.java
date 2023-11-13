@@ -2,6 +2,7 @@ package com.dailybudget.budgetapi.domain.service.user;
 
 import com.dailybudget.budgetapi.domain.models.user.UserLogin;
 import com.dailybudget.budgetapi.domain.repository.user.UserLoginRepository;
+import com.dailybudget.budgetapi.infrastructure.adapters.entities.user.UserLoginEntity;
 import reactor.core.publisher.Mono;
 
 public class UserLoginDomainService {
@@ -12,7 +13,7 @@ public class UserLoginDomainService {
         this.userLoginRepository = userLoginRepository;
     }
 
-    public Mono<UserLogin> registerUserLogin(UserLogin userLogin){
+    public Mono<UserLoginEntity> registerUserLogin(UserLogin userLogin){
         return userLoginRepository.register(userLogin);
     }
 

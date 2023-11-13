@@ -2,8 +2,7 @@ package com.dailybudget.budgetapi.domain.service.category;
 
 import com.dailybudget.budgetapi.domain.models.category.Category;
 import com.dailybudget.budgetapi.domain.repository.category.CategoryRepository;
-import com.dailybudget.budgetapi.presentation.dtos.category.CategoryDTO;
-import com.dailybudget.budgetapi.presentation.dtos.category.ConsultCategoryDTO;
+import com.dailybudget.budgetapi.infrastructure.adapters.entities.catagory.CategoryEntity;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -17,11 +16,11 @@ public class CategoryDomainService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Mono<CategoryDTO> registerCategory(Category category){
+    public Mono<CategoryEntity> registerCategory(Category category){
         return categoryRepository.register(category);
     }
 
-    public Mono<List<ConsultCategoryDTO>> getCategoryByUserId(UUID userId){
+    public Mono<List<CategoryEntity>> getCategoryByUserId(UUID userId){
         return categoryRepository.getByUserId(userId);
     }
 }
