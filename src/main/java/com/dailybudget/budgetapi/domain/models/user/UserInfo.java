@@ -1,22 +1,53 @@
 package com.dailybudget.budgetapi.domain.models.user;
 
-import jakarta.persistence.*;
-import lombok.Data;
-
 import java.math.BigDecimal;
 import java.util.UUID;
 
-@Data
-@Entity
-@Table(name = "users")
 public class UserInfo {
 
-    @Id
     private UUID id;
     private String name;
     private BigDecimal salary;
-    @Column(name = "saving_rule")
     private String savingRule;
-    @Column(name = "user_type")
     private String userType;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public BigDecimal getSalary() {
+        return salary;
+    }
+
+    public void setSalary(BigDecimal salary) {
+        this.salary = salary;
+    }
+
+    public String getSavingRule() {
+        return savingRule;
+    }
+
+    public void setSavingRule(String savingRule) {
+        this.savingRule = savingRule;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
 }

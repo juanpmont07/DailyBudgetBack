@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-public class RegisterCategoryDTO implements DTO {
-    private String name;
-    private UUID userId;
+public class ConsultCategoryDTO implements DTO {
+    private UUID idCategory;
+    private String categoryName;
 }

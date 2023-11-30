@@ -1,4 +1,4 @@
-FROM postgres
+FROM postgres:1.1.1
 
 ENV POSTGRES_USER admin
 ENV POSTGRES_PASSWORD admin_budget

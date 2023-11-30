@@ -1,12 +1,28 @@
 package com.dailybudget.budgetapi.domain.exceptions;
+import com.dailybudget.budgetapi.domain.utils.StatusCode;
+
+import static org.apache.logging.log4j.util.Strings.EMPTY;
 
 public class DomainException extends RuntimeException {
 
-    public DomainException(String message) {
-        super(message);
+    private final StatusCode statusCode;
+
+    public DomainException(StatusCode statusCode) {
+        super(EMPTY);
+        this.statusCode = statusCode;
     }
 
-    public DomainException(String message, Throwable cause) {
+    public DomainException(String message, StatusCode statusCode) {
+        super(message);
+        this.statusCode = statusCode;
+    }
+
+    public DomainException(String message, StatusCode statusCode, Throwable cause) {
         super(message, cause);
+        this.statusCode = statusCode;
+    }
+
+    public StatusCode getErrorCode() {
+        return statusCode;
     }
 }

@@ -2,25 +2,25 @@ package com.dailybudget.budgetapi.domain.service.user;
 
 import com.dailybudget.budgetapi.domain.models.user.UserInfo;
 import com.dailybudget.budgetapi.domain.repository.user.UserInfoRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.dailybudget.budgetapi.infrastructure.adapters.entities.user.UserInfoEntity;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
-@Service
-@RequiredArgsConstructor
-public class UserInfoService {
 
-    @Autowired
+public class UserInfoDomainService {
+
     private final UserInfoRepository userInfoRepository;
 
-    public Mono<UserInfo> registerUserInfo(UserInfo userInfo){
+    public UserInfoDomainService(UserInfoRepository userInfoRepository) {
+        this.userInfoRepository = userInfoRepository;
+    }
+
+    public Mono<UserInfoEntity> registerUserInfo(UserInfo userInfo){
        return userInfoRepository.register(userInfo);
     }
 
-    public Mono<UserInfo> getUserInfoById(UUID id){
+    public Mono<UserInfoEntity> getUserInfoById(UUID id){
         return userInfoRepository.getById(id);
     }
 
