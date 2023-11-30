@@ -1,0 +1,8 @@
+version: '2.23.0'
+services:
+  daily-budget-postgres:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5432:5432"

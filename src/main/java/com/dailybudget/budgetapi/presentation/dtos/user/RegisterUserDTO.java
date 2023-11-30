@@ -13,4 +13,6 @@ public class RegisterUserDTO implements DTO {
     private BigDecimal salary;
     private String savingRule;
     private String userType;
+    private String username;
+    private String password;
 }

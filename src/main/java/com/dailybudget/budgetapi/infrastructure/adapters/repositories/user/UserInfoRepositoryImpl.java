@@ -21,20 +21,12 @@ public class UserInfoRepositoryImpl implements UserInfoRepository {
     @Override
     public Mono<UserInfo> getById(UUID id) {
         Optional<UserInfo> userOptional = userInfoJpaRepository.findById(id);
-        if (userOptional.isPresent()) {
-            return Mono.just(userOptional.get());
-        } else {
-            return Mono.empty();
-        }
+        return userOptional.map(Mono::just).orElseGet(Mono::empty);
     }
 
     @Override
     public Mono<UserInfo> register(UserInfo userInfo) {
-        try {
-            UserInfo savedUser = userInfoJpaRepository.save(userInfo);
-            return Mono.just(savedUser);
-        } catch (Exception ex) {
-            throw new DomainException("Error registering the user", ex);
-        }
+        return Mono.fromCallable(()->userInfoJpaRepository.save(userInfo))
+                .onErrorMap(ex->new DomainException("Error registering the user",ex));
     }
 }

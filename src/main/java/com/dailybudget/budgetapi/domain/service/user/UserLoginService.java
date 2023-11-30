@@ -1,4 +1,4 @@
-package com.dailybudget.budgetapi.domain.service;
+package com.dailybudget.budgetapi.domain.service.user;
 
 import com.dailybudget.budgetapi.domain.models.user.UserLogin;
 import com.dailybudget.budgetapi.domain.repository.user.UserLoginRepository;

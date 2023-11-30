@@ -18,6 +18,6 @@ public class UserLoginRepositoryImpl implements UserLoginRepository {
     @Override
     public Mono<UserLogin> register(UserLogin userLogin) {
         return Mono.fromCallable(()->userLoginJpaRepository.save(userLogin))
-                .onErrorResume(error->Mono.error(new DomainException("Error try to register the user in userLogin",error)));
+                .onErrorMap(ex->new DomainException("Error try to register the user in userLogin",ex));
     }
 }
