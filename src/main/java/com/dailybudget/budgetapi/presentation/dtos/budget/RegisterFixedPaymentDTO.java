@@ -15,4 +15,16 @@ public class RegisterFixedPaymentDTO implements DTO {
     private BigDecimal value;
     private UUID user_id;
     private Date pay_date;
+
+    public RegisterFixedPaymentDTO() {
+    }
+
+    public RegisterFixedPaymentDTO(UUID id, String description, UUID category_id, BigDecimal value, UUID user_id, Date pay_date) {
+        this.id = id;
+        this.description = description;
+        this.category_id = category_id;
+        this.value = value;
+        this.user_id = user_id;
+        this.pay_date = pay_date;
+    }
 }

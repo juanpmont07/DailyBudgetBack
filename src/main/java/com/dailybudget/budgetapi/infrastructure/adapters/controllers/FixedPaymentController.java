@@ -3,7 +3,6 @@ package com.dailybudget.budgetapi.infrastructure.adapters.controllers;
 import com.dailybudget.budgetapi.application.command.budget.CreateFixedPayment;
 import com.dailybudget.budgetapi.presentation.dtos.ResponseDTO;
 import com.dailybudget.budgetapi.presentation.dtos.budget.RequestRegisterPaymentDTO;
-import com.dailybudget.budgetapi.presentation.dtos.user.RegisterUserDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
