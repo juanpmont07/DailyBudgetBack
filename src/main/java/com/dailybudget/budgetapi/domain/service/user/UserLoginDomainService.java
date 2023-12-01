@@ -2,19 +2,18 @@ package com.dailybudget.budgetapi.domain.service.user;
 
 import com.dailybudget.budgetapi.domain.models.user.UserLogin;
 import com.dailybudget.budgetapi.domain.repository.user.UserLoginRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.dailybudget.budgetapi.infrastructure.adapters.entities.user.UserLoginEntity;
 import reactor.core.publisher.Mono;
 
-@Service
-@RequiredArgsConstructor
-public class UserLoginService {
+public class UserLoginDomainService {
 
-    @Autowired
     private final UserLoginRepository userLoginRepository;
 
-    public Mono<UserLogin> registerUserLogin(UserLogin userLogin){
+    public UserLoginDomainService(UserLoginRepository userLoginRepository) {
+        this.userLoginRepository = userLoginRepository;
+    }
+
+    public Mono<UserLoginEntity> registerUserLogin(UserLogin userLogin){
         return userLoginRepository.register(userLogin);
     }
 

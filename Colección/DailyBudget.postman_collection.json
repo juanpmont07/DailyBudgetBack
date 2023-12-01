@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "e56f5ae2-bc87-4267-8812-835f94fc4a54",
+		"name": "DailyBudget",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17436198"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Obtener usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8082/user/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"user",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"550e8400-e29b-41d4-a716-446655440004\",\r\n    \"username\": \"aafranco\",\r\n    \"password\": \"Alex11\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/user/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Alex2\",\r\n    \"salary\": 20000,\r\n    \"savingRule\": \"Vacaciones\",\r\n    \"userType\": \"Administrator\",\r\n    \"username\": \"aafranco\",\r\n    \"password\": \"Alex12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/user/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Registrar categoria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"name\": \"Mercado\",\r\n    \"userId\": \"450f4268-5a19-483f-8418-9f8c75963597\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/category/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"category",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categorias por usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8082/category?userId=550e8400-e29b-41d4-a716-446655440004",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"category"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "550e8400-e29b-41d4-a716-446655440004"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{PASS}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{USER}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "PASS",
+			"value": "admin_budget"
+		},
+		{
+			"key": "USER",
+			"value": "admin"
+		}
+	]
+}

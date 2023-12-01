@@ -2,11 +2,11 @@ package com.dailybudget.budgetapi.infrastructure.adapters.controllers;
 
 import com.dailybudget.budgetapi.application.command.user.CreateUserLogin;
 import com.dailybudget.budgetapi.application.command.user.CreateUserInfo;
+import com.dailybudget.budgetapi.domain.exceptions.DomainException;
 import com.dailybudget.budgetapi.presentation.dtos.user.RegisterLoginDTO;
 import com.dailybudget.budgetapi.presentation.dtos.user.RegisterUserDTO;
 import com.dailybudget.budgetapi.presentation.dtos.ResponseDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +17,7 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
     private final CreateUserInfo createUserInfo;
-    @Autowired
     private final CreateUserLogin createUserLogin;
 
     @GetMapping
@@ -27,9 +25,9 @@ public class UserController {
         return Mono.just("1.0.0");
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public Mono<ResponseEntity<String>> validateLogin(@RequestBody RegisterLoginDTO loginUserDTO) {
-        return Mono.just(ResponseEntity.status(HttpStatus.ACCEPTED).body("se valida login"));
+        return Mono.just(ResponseEntity.status(HttpStatus.OK).body("se valida login"));
     }
 
     @PostMapping("/register")
@@ -40,23 +38,21 @@ public class UserController {
                      loginUserDTO.setUserId(user.getId());
                      loginUserDTO.setUsername(registerUserDTO.getUsername());
                      loginUserDTO.setPassword(registerUserDTO.getPassword());
-
                      return createUserLogin.execute(loginUserDTO)
                              .map(login->ResponseEntity.status(HttpStatus.CREATED).body(new ResponseDTO(user, login))
-                             ).onErrorResume(throwable -> {
-                                 String errorMessage = throwable.getMessage();
-                                 return Mono.just(ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseDTO(errorMessage)));
-                             });
-                 })
-                 .onErrorResume(throwable -> {
-                     String errorMessage = throwable.getMessage();
-                     return Mono.just(ResponseEntity.status( HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseDTO(errorMessage)));
-                 });
+                             ).onErrorResume(DomainException.class, domainException ->
+                               Mono.just(ResponseEntity.status(domainException.getErrorCode().getHttpStatus())
+                                   .body(new ResponseDTO(domainException)))
+                             );
+                 }).onErrorResume(DomainException.class, domainException ->
+                         Mono.just(ResponseEntity.status(domainException.getErrorCode().getHttpStatus())
+                         .body(new ResponseDTO(domainException)))
+                 );
     }
 
     @GetMapping("/all")
     public Mono<ResponseEntity<String>> getUserAll() {
-        return Mono.just( ResponseEntity.status(HttpStatus.ACCEPTED).body("aquiiiii muchos usuarios"));
+        return Mono.just( ResponseEntity.status(HttpStatus.OK).body("aquiiiii muchos usuarios"));
     }
 /*
     @GetMapping("/example")
