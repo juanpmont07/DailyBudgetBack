@@ -1,11 +1,11 @@
 package com.dailybudget.budgetapi.infrastructure.config;
 
-import com.dailybudget.budgetapi.domain.repository.category.CategoryRepository;
-import com.dailybudget.budgetapi.domain.repository.user.UserInfoRepository;
-import com.dailybudget.budgetapi.domain.repository.user.UserLoginRepository;
-import com.dailybudget.budgetapi.domain.service.category.CategoryDomainService;
-import com.dailybudget.budgetapi.domain.service.user.UserInfoDomainService;
-import com.dailybudget.budgetapi.domain.service.user.UserLoginDomainService;
+import com.dailybudget.budgetapi.domain.category.port.CategoryRepository;
+import com.dailybudget.budgetapi.domain.user.port.UserInfoRepository;
+import com.dailybudget.budgetapi.domain.user.port.UserLoginRepository;
+import com.dailybudget.budgetapi.domain.category.service.CategoryDomainService;
+import com.dailybudget.budgetapi.domain.user.service.UserInfoDomainService;
+import com.dailybudget.budgetapi.domain.user.service.UserLoginDomainService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

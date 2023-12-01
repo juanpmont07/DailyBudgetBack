@@ -1,6 +1,6 @@
 package com.dailybudget.budgetapi.presentation.dtos;
 
-import com.dailybudget.budgetapi.domain.exceptions.DomainException;
+import com.dailybudget.budgetapi.domain.shared.exceptions.DomainException;
 import lombok.Data;
 
 import java.util.ArrayList;
