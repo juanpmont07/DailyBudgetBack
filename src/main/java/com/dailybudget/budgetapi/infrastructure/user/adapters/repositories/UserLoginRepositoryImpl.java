@@ -22,8 +22,8 @@ public class UserLoginRepositoryImpl implements UserLoginRepository {
     private final UserLoginMapper userLoginMapper;
 
     @Override
-    public Mono<UserLoginEntity> register(UserLogin userLogin) {
-        return Mono.fromCallable(()->userLoginJpaRepository.save(userLoginMapper.toEntity(userLogin)))
+    public Mono<UserLogin> register(UserLogin userLogin) {
+        return Mono.fromCallable(()->userLoginMapper.toDomain(userLoginJpaRepository.save(userLoginMapper.toEntity(userLogin))))
                 .onErrorMap(ex->new DomainException(ex.getMessage(), StatusCode.USER_WAS_NOT_REGISTERED,ex));
     }
 }

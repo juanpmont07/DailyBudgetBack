@@ -35,12 +35,10 @@ public class UserService {
     }
 
     public Mono<UserLoginDTO> registerUserLogin(UserLogin userLogin){
-        return userInfoDomainService.getUserInfoById(userLogin.getUserId())
+        return userInfoDomainService.getUserInfoById(userLogin.getIdUserInfo())
                .switchIfEmpty(Mono.error(new DomainException(StatusCode.USER_WAS_NOT_FOUND)))
                 .flatMap(userInfo -> userLoginDomainService.registerUserLogin(userLogin)
-                        .map(userLoginEntity -> { userLoginEntity.setUserInfo(userInfo);
-                            return userLoginMapper.toDTO(userLoginEntity);
-                        }));
+                        .map(userLoginMapper::toDTO));
 
     }
 

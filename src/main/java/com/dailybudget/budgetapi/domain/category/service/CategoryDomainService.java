@@ -16,11 +16,11 @@ public class CategoryDomainService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Mono<CategoryEntity> registerCategory(Category category){
+    public Mono<Category> registerCategory(Category category){
         return categoryRepository.register(category);
     }
 
-    public Mono<List<CategoryEntity>> getCategoryByUserId(UUID userId){
+    public Mono<List<Category>> getCategoryByUserId(UUID userId){
         return categoryRepository.getByUserId(userId);
     }
 }

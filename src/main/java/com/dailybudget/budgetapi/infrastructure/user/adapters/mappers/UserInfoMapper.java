@@ -10,16 +10,14 @@ import org.springframework.stereotype.Component;
 public class UserInfoMapper {
 
     public UserInfo toDomain(RegisterUserDTO dto) {
-        UserInfo userInfo = new UserInfo();
-        userInfo.setId(dto.getId());
-        userInfo.setName(dto.getName());
-        userInfo.setSalary(dto.getSalary());
-        userInfo.setSavingRule(dto.getSavingRule());
-        userInfo.setUserType(dto.getUserType());
-        return userInfo;
+        return UserInfo.create(dto.getName(), dto.getSalary(), dto.getSavingRule(), dto.getUserType());
     }
 
-    public UserInfoDTO toDTO(UserInfoEntity userInfo) {
+    public UserInfo toDomain(UserInfoEntity dto) {
+        return UserInfo.rebuild(dto.getId(), dto.getName(), dto.getSalary(), dto.getSavingRule(), dto.getUserType());
+    }
+
+    public UserInfoDTO toDTO(UserInfo userInfo) {
         UserInfoDTO userInfoDto = new UserInfoDTO();
         userInfoDto.setId(userInfo.getId());
         userInfoDto.setName(userInfo.getName());

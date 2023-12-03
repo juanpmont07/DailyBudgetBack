@@ -10,24 +10,24 @@ import org.springframework.stereotype.Component;
 public class UserLoginMapper {
 
     public UserLogin toDomain(RegisterLoginDTO dto) {
-        UserLogin userLogin = new UserLogin();
-        userLogin.setUserId(dto.getUserId());
-        userLogin.setUsername(dto.getUsername());
-        userLogin.setPassword(dto.getPassword());
-        return userLogin;
+       return UserLogin.rebuild(dto.getUserId(), dto.getUsername(), dto.getPassword());
     }
 
-    public UserLoginDTO toDTO(UserLoginEntity userLogin) {
+    public UserLogin toDomain(UserLoginEntity dto) {
+        return UserLogin.rebuild(dto.getUserId(), dto.getUsername(), dto.getPassword());
+    }
+
+    public UserLoginDTO toDTO(UserLogin userLogin) {
         UserLoginDTO login = new UserLoginDTO();
-        login.setName(userLogin.getUserInfo().getName());
-        login.setUserType(userLogin.getUserInfo().getUserType());
+        login.setName(userLogin.getNameUserInfo());
+        login.setUserType(userLogin.getTypeUserInfo());
         login.setAccessToken("access token generate successful");
         return login;
     }
 
     public UserLoginEntity toEntity(UserLogin domain) {
         UserLoginEntity userLogin = new UserLoginEntity();
-        userLogin.setUserId(domain.getUserId());
+        userLogin.setUserId(domain.getIdUserInfo());
         userLogin.setUsername(domain.getUsername());
         userLogin.setPassword(domain.getPassword());
         return userLogin;

@@ -1,11 +1,13 @@
 package com.dailybudget.budgetapi.infrastructure.category.adapters.mappers;
 
 import com.dailybudget.budgetapi.domain.category.models.entities.Category;
+import com.dailybudget.budgetapi.domain.user.models.entities.UserInfo;
 import com.dailybudget.budgetapi.infrastructure.category.adapters.entities.CategoryEntity;
 import com.dailybudget.budgetapi.infrastructure.user.adapters.entities.UserInfoEntity;
 import com.dailybudget.budgetapi.domain.category.models.dto.CategoryDTO;
 import com.dailybudget.budgetapi.domain.category.models.dto.ConsultCategoryDTO;
 import com.dailybudget.budgetapi.domain.category.models.dto.RegisterCategoryDTO;
+import com.dailybudget.budgetapi.infrastructure.user.adapters.mappers.UserInfoMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -15,12 +17,13 @@ import java.util.List;
 public class CategoryMapper {
 
     public Category toDomain(RegisterCategoryDTO dto) {
-        Category category = new Category();
-        if (dto!=null) {
-            category.setName(dto.getName());
-            category.setUserId(dto.getUserId());
-        }
-        return category;
+        UserInfo userInfo = UserInfo.rebuild(dto.getUserId());
+        return Category.create(dto.getName(), userInfo);
+    }
+
+    public Category toDomain(CategoryEntity dto) {
+        UserInfo userInfo = new UserInfoMapper().toDomain(dto.getUserInfo());
+        return Category.create(dto.getName(), userInfo);
     }
 
     public CategoryEntity toEntity(Category domain) {
@@ -33,7 +36,7 @@ public class CategoryMapper {
         return categoryEntity;
     }
 
-    public CategoryDTO toDTO(CategoryEntity category) {
+    public CategoryDTO toDTO(Category category) {
         CategoryDTO categoryDTO = new CategoryDTO();
         if(category!=null) {
             categoryDTO.setIdCategory(category.getId());
@@ -44,7 +47,7 @@ public class CategoryMapper {
         return categoryDTO;
     }
 
-    public List<ConsultCategoryDTO> toListDTO(List<CategoryEntity> categories) {
+    public List<ConsultCategoryDTO> toListDTO(List<Category> categories) {
         List<ConsultCategoryDTO> consultCategoryDTO = new ArrayList<>();
         categories.forEach(category -> {
             ConsultCategoryDTO consult = new ConsultCategoryDTO();

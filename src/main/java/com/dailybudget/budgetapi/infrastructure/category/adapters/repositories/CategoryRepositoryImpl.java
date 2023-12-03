@@ -13,6 +13,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -26,15 +27,20 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
 
     @Override
-    public Mono<CategoryEntity> register(Category category) {
-        return Mono.fromCallable(()->categoryJpaRepository.save(categoryMapper.toEntity(category)))
+    public Mono<Category> register(Category category) {
+        return Mono.fromCallable(()->categoryMapper.toDomain(categoryJpaRepository.save(categoryMapper.toEntity(category))))
                 .onErrorMap(ex->new DomainException(ex.getMessage(), StatusCode.CATEGORY_WAS_NOT_REGISTERED,ex));
     }
 
     @Override
-    public Mono<List<CategoryEntity>> getByUserId(UUID id) {
-        return Mono.fromCallable(()->categoryJpaRepository.findByUserInfoId(id))
-                .onErrorMap(ex->new DomainException(ex.getMessage(), StatusCode.CATEGORY_NOT_FOUND,ex));
+    public Mono<List<Category>> getByUserId(UUID id) {
+        return Mono.fromCallable(() ->
+                categoryJpaRepository.findByUserInfoId(id)
+                        .stream()
+                        .map(categoryMapper::toDomain)
+                        .collect(Collectors.toList())
+        ).onErrorMap(ex -> new DomainException(ex.getMessage(), StatusCode.CATEGORY_NOT_FOUND, ex));
     }
+
 
 }

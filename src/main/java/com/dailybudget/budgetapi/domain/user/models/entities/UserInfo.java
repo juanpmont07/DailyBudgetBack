@@ -15,39 +15,43 @@ public class UserInfo {
         return id;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public BigDecimal getSalary() {
         return salary;
     }
 
-    public void setSalary(BigDecimal salary) {
-        this.salary = salary;
-    }
-
     public String getSavingRule() {
         return savingRule;
-    }
-
-    public void setSavingRule(String savingRule) {
-        this.savingRule = savingRule;
     }
 
     public String getUserType() {
         return userType;
     }
 
-    public void setUserType(String userType) {
+    private UserInfo(UUID id, String name, BigDecimal salary, String savingRule, String userType) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+        this.savingRule = savingRule;
         this.userType = userType;
+    }
+
+    public UserInfo(UUID id) {
+        this.id = id;
+    }
+
+    public static UserInfo create(String name, BigDecimal salary, String savingRule, String userType) {
+        return new UserInfo(UUID.randomUUID(), name, salary, savingRule, userType);
+    }
+
+    public static UserInfo rebuild(UUID id, String name, BigDecimal salary, String savingRule, String userType) {
+        return new UserInfo(id, name, salary, savingRule, userType);
+    }
+
+    public static UserInfo rebuild(UUID id) {
+        return new UserInfo(id);
     }
 }

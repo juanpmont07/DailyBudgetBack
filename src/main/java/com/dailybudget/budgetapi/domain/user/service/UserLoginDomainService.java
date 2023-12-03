@@ -13,7 +13,7 @@ public class UserLoginDomainService {
         this.userLoginRepository = userLoginRepository;
     }
 
-    public Mono<UserLoginEntity> registerUserLogin(UserLogin userLogin){
+    public Mono<UserLogin> registerUserLogin(UserLogin userLogin){
         return userLoginRepository.register(userLogin);
     }
 

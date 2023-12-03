@@ -4,32 +4,40 @@ import java.util.UUID;
 
 public class UserLogin {
 
-    private UUID userId;
+    private UserInfo userInfo;
     private String username;
     private String password;
 
-    public UUID getUserId() {
-        return userId;
-    }
-
-    public void setUserId(UUID userId) {
-        this.userId = userId;
-    }
 
     public String getUsername() {
         return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public UUID getIdUserInfo(){
+        return this.userInfo.getId();
+    }
+
+    public String getNameUserInfo(){
+        return this.userInfo.getName();
+    }
+
+    public String getTypeUserInfo(){
+        return this.userInfo.getUserType();
+    }
+
+
+    private UserLogin(UserInfo userInfo, String username, String password) {
+        this.userInfo = userInfo;
+        this.username = username;
         this.password = password;
     }
 
-}
+    public static UserLogin rebuild(UUID userId, String username, String password) {
+        UserInfo userInfo1 = UserInfo.rebuild(userId);
+        return new UserLogin(userInfo1, username, password);
+    }
+    }

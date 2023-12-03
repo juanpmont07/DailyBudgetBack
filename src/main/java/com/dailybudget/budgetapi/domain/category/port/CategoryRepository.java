@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CategoryRepository {
-    Mono<CategoryEntity> register(Category category);
+    Mono<Category> register(Category category);
 
-    Mono<List<CategoryEntity>> getByUserId(UUID id);
+    Mono<List<Category>> getByUserId(UUID id);
 }

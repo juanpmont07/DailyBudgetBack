@@ -1,7 +1,7 @@
-package com.dailybudget.budgetapi.application.budget.command;
+package com.dailybudget.budgetapi.application.fixedpayment.command;
 
+import com.dailybudget.budgetapi.application.fixedpayment.command.service.RegisterFixedPaymentService;
 import com.dailybudget.budgetapi.application.shared.command.Command;
-import com.dailybudget.budgetapi.application.budget.command.service.RegisterFixedPaymentService;
 import com.dailybudget.budgetapi.infrastructure.fixedpayment.adapters.mappers.FixedPaymentMapper;
 import com.dailybudget.budgetapi.domain.fixedpayment.models.dto.RegisterFixedPaymentDTO;
 import com.dailybudget.budgetapi.domain.fixedpayment.models.dto.RequestRegisterPaymentDTO;
@@ -27,8 +27,7 @@ public class CreateFixedPayment  implements Command<RequestRegisterPaymentDTO, S
         UUID uuid = UUID.fromString(request.getIdUsuario());
         Flux<RegisterFixedPaymentDTO> registerFixedPaymentDTOFlux = Flux.fromIterable(request.getRegisterFixedPaymentDTO());
         return registerFixedPaymentService.register(registerFixedPaymentDTOFlux.map(fixed -> {
-            fixed.setId(UUID.randomUUID());
-           return fixedPaymentMapper.toEntity(fixed);
+           return fixedPaymentMapper.toDomain(fixed);
         }), uuid)
                 .collectList()
                 .map(response -> "Success");

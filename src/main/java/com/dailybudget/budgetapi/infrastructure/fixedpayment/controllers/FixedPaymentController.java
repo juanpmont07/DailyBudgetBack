@@ -1,6 +1,6 @@
 package com.dailybudget.budgetapi.infrastructure.fixedpayment.controllers;
 
-import com.dailybudget.budgetapi.application.budget.command.CreateFixedPayment;
+import com.dailybudget.budgetapi.application.fixedpayment.command.CreateFixedPayment;
 import com.dailybudget.budgetapi.presentation.dtos.ResponseDTO;
 import com.dailybudget.budgetapi.domain.fixedpayment.models.dto.RequestRegisterPaymentDTO;
 import lombok.RequiredArgsConstructor;

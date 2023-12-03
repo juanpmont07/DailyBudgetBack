@@ -16,11 +16,11 @@ public class UserInfoDomainService {
         this.userInfoRepository = userInfoRepository;
     }
 
-    public Mono<UserInfoEntity> registerUserInfo(UserInfo userInfo){
+    public Mono<UserInfo> registerUserInfo(UserInfo userInfo){
        return userInfoRepository.register(userInfo);
     }
 
-    public Mono<UserInfoEntity> getUserInfoById(UUID id){
+    public Mono<UserInfo> getUserInfoById(UUID id){
         return userInfoRepository.getById(id);
     }
 

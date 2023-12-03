@@ -1,6 +1,6 @@
 package com.dailybudget.budgetapi.domain.fixedpayment.servicio;
 
-import com.dailybudget.budgetapi.infrastructure.fixedpayment.adapters.entities.FixedPayment;
+import com.dailybudget.budgetapi.domain.fixedpayment.models.entites.FixedPayment;
 import com.dailybudget.budgetapi.domain.fixedpayment.port.FixedPaymentRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -23,7 +23,7 @@ public class FixedPaymentService {
     private static final Logger log = LoggerFactory.getLogger(FixedPaymentService.class);
 
     public Mono<FixedPayment> register(FixedPayment fixedPayments){
-        log.info("aqui ando 1111");
+        log.info("Inicia registro de costos fijos" + fixedPayments.getId());
         return fixedPaymentRepository.register(fixedPayments);
     }
 
