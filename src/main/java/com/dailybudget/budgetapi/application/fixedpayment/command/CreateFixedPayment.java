@@ -26,9 +26,7 @@ public class CreateFixedPayment  implements Command<RequestRegisterPaymentDTO, S
     public Mono<String> execute(RequestRegisterPaymentDTO request){
         UUID uuid = UUID.fromString(request.getIdUsuario());
         Flux<RegisterFixedPaymentDTO> registerFixedPaymentDTOFlux = Flux.fromIterable(request.getRegisterFixedPaymentDTO());
-        return registerFixedPaymentService.register(registerFixedPaymentDTOFlux.map(fixed -> {
-           return fixedPaymentMapper.toDomain(fixed);
-        }), uuid)
+        return registerFixedPaymentService.register(registerFixedPaymentDTOFlux.map(fixedPaymentMapper::toDomain), uuid)
                 .collectList()
                 .map(response -> "Success");
     }

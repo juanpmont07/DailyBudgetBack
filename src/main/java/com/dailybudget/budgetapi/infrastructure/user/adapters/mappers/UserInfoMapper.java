@@ -38,17 +38,5 @@ public class UserInfoMapper {
         }
         return userInfoEntity;
     }
-
-    public UserInfoEntity toEntity(UserInfoDTO dto) {
-        UserInfoEntity userInfoEntity = new UserInfoEntity();
-        if (dto!=null) {
-            userInfoEntity.setId(dto.getId());
-            userInfoEntity.setName(dto.getName());
-            userInfoEntity.setUserType(dto.getUserType());
-            userInfoEntity.setSalary(dto.getSalary());
-            userInfoEntity.setSavingRule(dto.getSavingRule());
-        }
-        return userInfoEntity;
-    }
 }
 

@@ -2,23 +2,21 @@ package com.dailybudget.budgetapi.domain.fixedpayment.servicio;
 
 import com.dailybudget.budgetapi.domain.fixedpayment.models.entites.FixedPayment;
 import com.dailybudget.budgetapi.domain.fixedpayment.port.FixedPaymentRepository;
-import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.UUID;
 
-@Service
-@RequiredArgsConstructor
 public class FixedPaymentService {
 
-    @Autowired
     private final FixedPaymentRepository fixedPaymentRepository;
+
+    public FixedPaymentService(FixedPaymentRepository fixedPaymentRepository) {
+        this.fixedPaymentRepository = fixedPaymentRepository;
+    }
 
     private static final Logger log = LoggerFactory.getLogger(FixedPaymentService.class);
 
