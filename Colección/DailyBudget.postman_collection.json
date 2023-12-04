@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "e56f5ae2-bc87-4267-8812-835f94fc4a54",
+		"_postman_id": "1576605a-9785-43d5-b306-cc3f3c338e8b",
 		"name": "DailyBudget",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "17436198"
+		"_exporter_id": "6816088"
 	},
 	"item": [
 		{
@@ -142,6 +142,40 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Costos fijos",
+			"item": [
+				{
+					"name": "Registrar usuario Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Alex2\",\r\n    \"salary\": 20000,\r\n    \"savingRule\": \"Vacaciones\",\r\n    \"userType\": \"Administrator\",\r\n    \"username\": \"aafranco\",\r\n    \"password\": \"Alex12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/user/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "On"
 		}
 	],
 	"auth": {
