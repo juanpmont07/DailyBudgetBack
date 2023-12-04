@@ -2,7 +2,6 @@ package com.dailybudget.budgetapi.domain.user.service;
 
 import com.dailybudget.budgetapi.domain.user.models.entities.UserInfo;
 import com.dailybudget.budgetapi.domain.user.port.UserInfoRepository;
-import com.dailybudget.budgetapi.infrastructure.user.adapters.entities.UserInfoEntity;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;

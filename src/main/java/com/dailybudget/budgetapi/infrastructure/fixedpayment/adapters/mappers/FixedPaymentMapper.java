@@ -55,7 +55,7 @@ public class FixedPaymentMapper {
     }
 
     public FixedPayment toDomain(FixedPaymentEntity entity) {
-        Category category = Category.rebuild(entity.getCategory().getId(), entity.getCategory().getName(),new CategoryMapper().toDomain(entity.getCategory().getUserInfo()));
+        Category category = new CategoryMapper().toDomain(entity.getCategory());
         UserInfo userInfo = UserInfo.rebuild(entity.getUser().getId(), entity.getUser().getName(), entity.getUser().getSalary(), entity.getUser().getSavingRule(), entity.getUser().getUserType());
         return FixedPayment.rebuild(entity.getId(), entity.getDescription(), entity.getPayDate(), category, entity.getValue(), userInfo);
     }

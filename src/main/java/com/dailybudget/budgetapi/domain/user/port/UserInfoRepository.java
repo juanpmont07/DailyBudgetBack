@@ -8,8 +8,8 @@ import java.util.UUID;
 
 public interface UserInfoRepository {
 
-    Mono<UserInfoEntity> getById(UUID id);
+    Mono<UserInfo> getById(UUID id);
 
-    Mono<UserInfoEntity> register(UserInfo userInfo);
+    Mono<UserInfo> register(UserInfo userInfo);
 
 }
