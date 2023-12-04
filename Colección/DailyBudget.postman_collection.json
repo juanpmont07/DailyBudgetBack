@@ -96,7 +96,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{   \r\n    \"name\": \"Mercado\",\r\n    \"userId\": \"450f4268-5a19-483f-8418-9f8c75963597\"\r\n}",
+							"raw": "{   \r\n    \"name\": \"Mercado222222\",\r\n    \"userId\": \"550e8400-e29b-41d4-a716-446655440001\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -123,7 +123,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8082/category?userId=550e8400-e29b-41d4-a716-446655440004",
+							"raw": "localhost:8082/category?userId=550e8400-e29b-41d4-a716-446655440001",
 							"host": [
 								"localhost"
 							],
@@ -134,7 +134,7 @@
 							"query": [
 								{
 									"key": "userId",
-									"value": "550e8400-e29b-41d4-a716-446655440004"
+									"value": "550e8400-e29b-41d4-a716-446655440001"
 								}
 							]
 						}
@@ -153,7 +153,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Alex2\",\r\n    \"salary\": 20000,\r\n    \"savingRule\": \"Vacaciones\",\r\n    \"userType\": \"Administrator\",\r\n    \"username\": \"aafranco\",\r\n    \"password\": \"Alex12\"\r\n}",
+							"raw": "{\r\n    \"registerFixedPaymentDTO\": [\r\n        {\r\n            \"id\": \"c57be5d2-8c5a-4f92-859f-23f5cf049d54\",\r\n            \"description\": \"Electricity Bill\",\r\n            \"category_id\": \"550e8400-e29b-41d4-a716-446655440006\",\r\n            \"value\": 75.50,\r\n            \"user_id\": \"550e8400-e29b-41d4-a716-446655440001\",\r\n            \"pay_date\": \"2023-12-31T00:00:00Z\"\r\n        },\r\n        {\r\n            \"id\": \"df12faba-9bae-4f44-a90a-64cc4617b356\",\r\n            \"description\": \"Internet Subscription\",\r\n            \"category_id\": \"550e8400-e29b-41d4-a716-446655440006\",\r\n            \"value\": 50.00,\r\n            \"user_id\": \"550e8400-e29b-41d4-a716-446655440001\",\r\n            \"pay_date\": \"2023-12-20T00:00:00Z\"\r\n        }\r\n    ],\r\n    \"idUsuario\": \"550e8400-e29b-41d4-a716-446655440001\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -161,14 +161,38 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8082/user/register",
+							"raw": "localhost:8082/fixed_payment/register",
 							"host": [
 								"localhost"
 							],
 							"port": "8082",
 							"path": [
-								"user",
+								"fixed_payment",
 								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categorias por usuario Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8082/fixed_payment?userId=550e8400-e29b-41d4-a716-446655440004",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"fixed_payment"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "550e8400-e29b-41d4-a716-446655440004"
+								}
 							]
 						}
 					},
