@@ -11,7 +11,6 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 public class RegisterFixedPaymentDTO implements DTO {
-    private UUID id;
     private String description;
     private UUID category_id;
     private BigDecimal value;

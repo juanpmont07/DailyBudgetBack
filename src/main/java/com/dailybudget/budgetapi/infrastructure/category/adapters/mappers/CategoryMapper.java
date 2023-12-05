@@ -23,7 +23,7 @@ public class CategoryMapper {
 
     public Category toDomain(CategoryEntity dto) {
         UserInfo userInfo = new UserInfoMapper().toDomain(dto.getUserInfo());
-        return Category.create(dto.getName(), userInfo);
+        return Category.rebuild(dto.getId(), dto.getName(), userInfo);
     }
 
     public CategoryEntity toEntity(Category domain) {

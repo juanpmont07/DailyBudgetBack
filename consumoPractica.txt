@@ -1,0 +1,83 @@
+{
+    "name": "Juan prueba",
+    "salary": 20000,
+    "savingRule": "Nose",
+    "userType": "USER",
+    "username": "jpmontoy",
+    "password": "jpmontoy"
+}
+
+ "dto": [
+        {
+            "id": "445e7eee-c3b9-4605-ad9b-6afee2e50d63",
+            "name": "Juan prueba",
+            "salary": 20000,
+            "savingRule": "Nose",
+            "userType": "USER"
+        },
+        {
+            "name": null,
+            "userType": null,
+            "accessToken": "access token generate successful"
+        }
+    ],
+    "message": ""
+}
+
+EL login no lo veoo....
+categoria solo  de uno
+
+
+{   
+    "name": "Comidad y Aseo",
+    "userId": "445e7eee-c3b9-4605-ad9b-6afee2e50d63"
+}
+
+{   
+    "name": "Perros y Gatos",
+    "userId": "445e7eee-c3b9-4605-ad9b-6afee2e50d63"
+}
+{   
+    "name": "Moto",
+    "userId": "445e7eee-c3b9-4605-ad9b-6afee2e50d63"
+}
+
+{
+    "dto": [
+        {
+            "idCategory": "ae0a7df5-cd4c-41e1-bc26-3183579ef1c2",
+            "categoryName": "Comidad y Aseo"
+        },
+        {
+            "idCategory": "78839cba-30f8-4d39-a98f-510510092302",
+            "categoryName": "Perros y Gatos"
+        },
+        {
+            "idCategory": "bff6f9b5-5f22-40a5-aa7c-43aa020a1b7a",
+            "categoryName": "Moto"
+        }
+    ],
+    "message": ""
+}
+
+
+
+{
+    "registerFixedPaymentDTO": [
+        {
+            "description": "Seguro Moto",
+            "category_id": "5f29115e-cc03-4e79-849b-25b2fa66cb18",
+            "value": 55533.50,
+            "user_id": "445e7eee-c3b9-4605-ad9b-6afee2e50d63",
+            "pay_date": "2023-12-20T00:00:00Z"
+        },
+        {
+            "description": "Parqueadero",
+            "category_id": "5f29115e-cc03-4e79-849b-25b2fa66cb18",
+            "value": 40000.00,
+            "user_id": "445e7eee-c3b9-4605-ad9b-6afee2e50d63",
+            "pay_date": "2023-12-20T00:00:00Z"
+        }
+    ],
+    "idUsuario": "445e7eee-c3b9-4605-ad9b-6afee2e50d63"
+}

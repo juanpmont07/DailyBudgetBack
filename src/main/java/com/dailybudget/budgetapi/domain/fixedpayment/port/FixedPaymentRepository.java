@@ -11,4 +11,7 @@ public interface FixedPaymentRepository {
     Mono<FixedPayment> register(FixedPayment fixedPayment);
 
     Flux<FixedPayment> getFixedPaymentsByUserId(UUID userId);
+
+    Mono<FixedPayment> getFixedPaymentsById(UUID userId);
+
 }

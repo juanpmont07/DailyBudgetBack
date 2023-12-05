@@ -35,7 +35,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": \"550e8400-e29b-41d4-a716-446655440004\",\r\n    \"username\": \"aafranco\",\r\n    \"password\": \"Alex11\"\r\n}",
+							"raw": "{\r\n    \"userId\": \"\",\r\n    \"username\": \"jpmontoy\",\r\n    \"password\": \"jpmontoy\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -63,7 +63,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Alex2\",\r\n    \"salary\": 20000,\r\n    \"savingRule\": \"Vacaciones\",\r\n    \"userType\": \"Administrator\",\r\n    \"username\": \"aafranco\",\r\n    \"password\": \"Alex12\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Juan prueba\",\r\n    \"salary\": 20000,\r\n    \"savingRule\": \"Nose\",\r\n    \"userType\": \"USER\",\r\n    \"username\": \"jpmontoy\",\r\n    \"password\": \"jpmontoy\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -96,7 +96,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{   \r\n    \"name\": \"Mercado222222\",\r\n    \"userId\": \"550e8400-e29b-41d4-a716-446655440001\"\r\n}",
+							"raw": "{   \r\n    \"name\": \"Moto\",\r\n    \"userId\": \"445e7eee-c3b9-4605-ad9b-6afee2e50d63\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -123,7 +123,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8082/category?userId=550e8400-e29b-41d4-a716-446655440001",
+							"raw": "localhost:8082/category?userId=445e7eee-c3b9-4605-ad9b-6afee2e50d63",
 							"host": [
 								"localhost"
 							],
@@ -134,7 +134,7 @@
 							"query": [
 								{
 									"key": "userId",
-									"value": "550e8400-e29b-41d4-a716-446655440001"
+									"value": "445e7eee-c3b9-4605-ad9b-6afee2e50d63"
 								}
 							]
 						}
@@ -147,13 +147,13 @@
 			"name": "Costos fijos",
 			"item": [
 				{
-					"name": "Registrar usuario Copy",
+					"name": "Registrar costo fijo",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"registerFixedPaymentDTO\": [\r\n        {\r\n            \"id\": \"c57be5d2-8c5a-4f92-859f-23f5cf049d54\",\r\n            \"description\": \"Electricity Bill\",\r\n            \"category_id\": \"550e8400-e29b-41d4-a716-446655440006\",\r\n            \"value\": 75.50,\r\n            \"user_id\": \"550e8400-e29b-41d4-a716-446655440001\",\r\n            \"pay_date\": \"2023-12-31T00:00:00Z\"\r\n        },\r\n        {\r\n            \"id\": \"df12faba-9bae-4f44-a90a-64cc4617b356\",\r\n            \"description\": \"Internet Subscription\",\r\n            \"category_id\": \"550e8400-e29b-41d4-a716-446655440006\",\r\n            \"value\": 50.00,\r\n            \"user_id\": \"550e8400-e29b-41d4-a716-446655440001\",\r\n            \"pay_date\": \"2023-12-20T00:00:00Z\"\r\n        }\r\n    ],\r\n    \"idUsuario\": \"550e8400-e29b-41d4-a716-446655440001\"\r\n}\r\n",
+							"raw": "{\r\n    \"registerFixedPaymentDTO\": [\r\n        {\r\n            \"description\": \"Seguro Moto\",\r\n            \"category_id\": \"5f29115e-cc03-4e79-849b-25b2fa66cb18\",\r\n            \"value\": 55533.50,\r\n            \"user_id\": \"445e7eee-c3b9-4605-ad9b-6afee2e50d63\",\r\n            \"pay_date\": \"2023-12-20T00:00:00Z\"\r\n        },\r\n        {\r\n            \"description\": \"Parqueadero\",\r\n            \"category_id\": \"5f29115e-cc03-4e79-849b-25b2fa66cb18\",\r\n            \"value\": 40000.00,\r\n            \"user_id\": \"445e7eee-c3b9-4605-ad9b-6afee2e50d63\",\r\n            \"pay_date\": \"2023-12-20T00:00:00Z\"\r\n        }\r\n    ],\r\n    \"idUsuario\": \"445e7eee-c3b9-4605-ad9b-6afee2e50d63\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -175,7 +175,7 @@
 					"response": []
 				},
 				{
-					"name": "Categorias por usuario Copy",
+					"name": "Obtener costos fijos",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -200,6 +200,39 @@
 				}
 			],
 			"description": "On"
+		},
+		{
+			"name": "Movimiento",
+			"item": [
+				{
+					"name": "Registrar Movimiento",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"registerMovementsDTOS\": [\r\n        {\r\n            \"idFixedPayment\": \"0df72047-bf97-48b3-b02e-06707840723d\",\r\n            \"description\": null,\r\n            \"date\": \"2023-12-05T10:00:00Z\",\r\n            \"idCategory\": null,\r\n            \"value\": null,\r\n            \"idUser\": \"445e7eee-c3b9-4605-ad9b-6afee2e50d63\"\r\n        },\r\n        {\r\n            \"idFixedPayment\": null,\r\n            \"description\": \"Compra en supermercado\",\r\n            \"date\": \"2023-12-02T09:30:00Z\",\r\n            \"idCategory\": \"ae0a7df5-cd4c-41e1-bc26-3183579ef1c2\",\r\n            \"value\": 50.20,\r\n            \"idUser\": \"445e7eee-c3b9-4605-ad9b-6afee2e50d63\"\r\n        }\r\n    ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/movements/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"movements",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"auth": {

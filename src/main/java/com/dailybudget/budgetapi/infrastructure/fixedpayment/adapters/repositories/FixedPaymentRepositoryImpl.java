@@ -3,11 +3,9 @@ package com.dailybudget.budgetapi.infrastructure.fixedpayment.adapters.repositor
 import com.dailybudget.budgetapi.domain.fixedpayment.models.entites.FixedPayment;
 import com.dailybudget.budgetapi.domain.shared.exceptions.DomainException;
 import com.dailybudget.budgetapi.domain.shared.utils.StatusCode;
-import com.dailybudget.budgetapi.infrastructure.fixedpayment.adapters.entities.FixedPaymentEntity;
 import com.dailybudget.budgetapi.domain.fixedpayment.port.FixedPaymentRepository;
 import com.dailybudget.budgetapi.domain.fixedpayment.servicio.FixedPaymentService;
 import com.dailybudget.budgetapi.infrastructure.fixedpayment.adapters.mappers.FixedPaymentMapper;
-import com.dailybudget.budgetapi.infrastructure.user.adapters.mappers.UserLoginMapper;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +30,8 @@ public class FixedPaymentRepositoryImpl implements FixedPaymentRepository {
     @Override
     public Mono<FixedPayment> register(FixedPayment fixedPayment) {
         log.info(fixedPayment.getDescription(), fixedPayment.getId());
-       return Mono.fromCallable(()->fixedPaymentMapper.toDomain(fixedPaymentJpaRepository.save(fixedPaymentMapper.toEntity(fixedPayment))))
+       return Mono.fromCallable(()->fixedPaymentJpaRepository.save(fixedPaymentMapper.toEntity(fixedPayment)))
+                .map(fixedPaymentMapper::toDomain)
                 .onErrorResume(error->Mono.error(new DomainException(error.getMessage(), StatusCode.USER_WAS_NOT_REGISTERED)));
     }
 
@@ -40,5 +39,14 @@ public class FixedPaymentRepositoryImpl implements FixedPaymentRepository {
         return Flux.fromIterable(fixedPaymentJpaRepository.findByUserId(userId))
                 .map(fixedPaymentMapper::toDomain);
     }
+
+    @Override
+    public Mono<FixedPayment> getFixedPaymentsById(UUID id) {
+        return Mono.fromCallable(() -> fixedPaymentJpaRepository.findById(id))
+                .flatMap(optionalFixedPayment -> optionalFixedPayment.map(Mono::just).orElse(Mono.empty()))
+                .map(fixedPaymentMapper::toDomain)
+                .switchIfEmpty(Mono.error(new DomainException("FixedPayment with ID " + id + " not found", StatusCode.FIXED_PAYMENT_NO_REGISTER)));
+    }
+
 
 }

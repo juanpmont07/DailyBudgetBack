@@ -10,8 +10,6 @@ import com.dailybudget.budgetapi.domain.fixedpayment.models.dto.RegisterFixedPay
 import com.dailybudget.budgetapi.infrastructure.user.adapters.entities.UserInfoEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
-
 @Component
 public class FixedPaymentMapper {
 
@@ -21,25 +19,9 @@ public class FixedPaymentMapper {
         return FixedPayment.create(dto.getDescription(), dto.getPay_date(), category, dto.getValue(), userInfo);
     }
 
-    public FixedPaymentEntity toEntity(RegisterFixedPaymentDTO dto) {
+    public FixedPaymentEntity toEntity(FixedPayment domain) {
         FixedPaymentEntity fixedPayment = new FixedPaymentEntity();
-        fixedPayment.setId(dto.getId());
-        fixedPayment.setDescription(dto.getDescription());
-        fixedPayment.setPayDate(dto.getPay_date());
-        fixedPayment.setValue(dto.getValue());
-        CategoryEntity category = new CategoryEntity();
-        category.setId(dto.getCategory_id());
-        fixedPayment.setCategory(category);
-        UserInfoEntity user = new UserInfoEntity();
-        user.setId(dto.getUser_id());
-        fixedPayment.setUser(user);
-        return fixedPayment;
-    }
-
-
-        public FixedPaymentEntity toEntity(FixedPayment domain) {
-        FixedPaymentEntity fixedPayment = new FixedPaymentEntity();
-        if (domain!=null) {
+        if (domain != null) {
             fixedPayment.setId(domain.getId());
             fixedPayment.setDescription(domain.getDescription());
             fixedPayment.setPayDate(domain.getPayDate());
