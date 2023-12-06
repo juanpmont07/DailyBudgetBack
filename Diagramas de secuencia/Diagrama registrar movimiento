@@ -1,0 +1,12 @@
+title Registrar movimiento
+
+app->usuario: Consultar usuario
+usuario->app: Usuario consultado
+app->presupuesto: Registrar lista movimientos
+loop por cada movimiento nuevo
+   
+    presupuesto->base de datos: Guardar
+end
+end
+presupuesto->usuario: Movimientos creados
+usuario->app: Registrado exitosamente
