@@ -1,38 +1,48 @@
-package com.dailybudget.budgetapi.infrastructure.config;
+package com.dailybudget.budgetapi.infrastructure.config.security;
 
-import com.dailybudget.budgetapi.domain.category.port.CategoryRepository;
-import com.dailybudget.budgetapi.domain.user.port.UserInfoRepository;
-import com.dailybudget.budgetapi.domain.user.port.UserLoginRepository;
-import com.dailybudget.budgetapi.domain.category.service.CategoryDomainService;
-import com.dailybudget.budgetapi.domain.user.service.UserInfoDomainService;
-import com.dailybudget.budgetapi.domain.user.service.UserLoginDomainService;
-import org.springframework.beans.factory.annotation.Value;
+import com.dailybudget.budgetapi.infrastructure.config.security.jwt.JwtAuthenticationFilter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfiguration {
 
+
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    private final AuthenticationProvider authenticationProvider;
+
+    @Bean
+    public SecurityFilterChain configure(HttpSecurity http) throws Exception{
+        return http.csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(authRequest ->
+                        authRequest.requestMatchers("/user/**").permitAll()
+                                .anyRequest().authenticated()
+                ).sessionManagement(sessionManager -> sessionManager.sessionCreationPolicy(
+                        SessionCreationPolicy.STATELESS
+                ))
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
+    }
+
+
+/*
     @Value("${app.security.username}")
     private String username;
 
     @Value("${app.security.password}")
     private String password;
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
     @Bean
     public InMemoryUserDetailsManager userDetailsManager(PasswordEncoder passwordEncoder){
@@ -44,16 +54,7 @@ public class SecurityConfiguration {
         return new InMemoryUserDetailsManager(user);
     }
 
-    @Bean
-    public SecurityFilterChain configure(HttpSecurity http) throws Exception{
-        return http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests()
-                    .requestMatchers("/**").authenticated()
-                    .anyRequest().permitAll()
-                    .and()
-                .httpBasic()
-                .and().build();
-    }
+
 
     @Bean
     public CategoryDomainService categoryDomainService(CategoryRepository categoryRepository) {
@@ -68,6 +69,6 @@ public class SecurityConfiguration {
     @Bean
     public UserLoginDomainService userLoginDomainService(UserLoginRepository userLoginRepository) {
         return new UserLoginDomainService(userLoginRepository);
-    }
+    }*/
 
 }

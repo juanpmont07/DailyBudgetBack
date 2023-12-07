@@ -3,13 +3,13 @@ package com.dailybudget.budgetapi.infrastructure.user.adapters.mappers;
 import com.dailybudget.budgetapi.domain.user.models.entities.UserLogin;
 import com.dailybudget.budgetapi.infrastructure.user.adapters.entities.UserLoginEntity;
 import com.dailybudget.budgetapi.domain.user.models.dto.UserLoginDTO;
-import com.dailybudget.budgetapi.domain.user.models.dto.RegisterLoginDTO;
+import com.dailybudget.budgetapi.domain.user.models.dto.LoginRequest;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserLoginMapper {
 
-    public UserLogin toDomain(RegisterLoginDTO dto) {
+    public UserLogin toDomain(LoginRequest dto) {
        return UserLogin.rebuild(dto.getUserId(), dto.getUsername(), dto.getPassword());
     }
 

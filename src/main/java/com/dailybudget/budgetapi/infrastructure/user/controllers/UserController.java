@@ -3,8 +3,10 @@ package com.dailybudget.budgetapi.infrastructure.user.controllers;
 import com.dailybudget.budgetapi.application.user.command.CreateUserLogin;
 import com.dailybudget.budgetapi.application.user.command.CreateUserInfo;
 import com.dailybudget.budgetapi.domain.shared.exceptions.DomainException;
-import com.dailybudget.budgetapi.domain.user.models.dto.RegisterLoginDTO;
+import com.dailybudget.budgetapi.domain.user.models.dto.LoginRequest;
 import com.dailybudget.budgetapi.domain.user.models.dto.RegisterUserDTO;
+import com.dailybudget.budgetapi.infrastructure.config.security.AuthResponse;
+import com.dailybudget.budgetapi.infrastructure.config.security.AuthService;
 import com.dailybudget.budgetapi.presentation.dtos.ResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,21 +22,24 @@ public class UserController {
     private final CreateUserInfo createUserInfo;
     private final CreateUserLogin createUserLogin;
 
+    private final AuthService authService;
+
     @GetMapping
     public Mono<String> version(){
         return Mono.just("1.0.0");
     }
 
     @PostMapping("/login")
-    public Mono<ResponseEntity<String>> validateLogin(@RequestBody RegisterLoginDTO loginUserDTO) {
-        return Mono.just(ResponseEntity.status(HttpStatus.OK).body("se valida login"));
+    public Mono<ResponseEntity<AuthResponse>> validateLogin(@RequestBody LoginRequest loginUserDTO) {
+       // return Mono.just(ResponseEntity.status(HttpStatus.OK).body("se valida login"));
+        return Mono.just(ResponseEntity.ok(authService.login(loginUserDTO)));
     }
 
     @PostMapping("/register")
     public Mono<ResponseEntity<ResponseDTO>> registerUser(@RequestBody RegisterUserDTO registerUserDTO) {
          return createUserInfo.execute(registerUserDTO)
                  .flatMap(user -> {
-                     RegisterLoginDTO loginUserDTO = new RegisterLoginDTO();
+                     LoginRequest loginUserDTO = new LoginRequest();
                      loginUserDTO.setUserId(user.getId());
                      loginUserDTO.setUsername(registerUserDTO.getUsername());
                      loginUserDTO.setPassword(registerUserDTO.getPassword());
