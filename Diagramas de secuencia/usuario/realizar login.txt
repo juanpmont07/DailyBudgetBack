@@ -1,0 +1,14 @@
+title Realizar Loging
+usuario->micro_usuario:Realizar login
+micro_usuario->base de datos: Validar existencia del usuario en UserLogin
+base de datos -> micro_usuario: Devuelve información de usuario
+alt si existe
+  micro_usuario->micro_usuario:Valida credenciales de acceso
+  alt si coinciden
+  micro_usuario->usuario: Genera token de acceso al api
+  else si no coincide
+  micro_usuario->usuario: Error, datos de acceso invalidos
+  end
+else si no existe
+micro_usuario->usuario: Error, usuario no registrado
+end

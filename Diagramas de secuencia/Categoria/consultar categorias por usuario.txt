@@ -1,0 +1,10 @@
+title Consultar categorias por usuario
+usuario->micro_usuario:validar acceso del usuario
+alt login correcto
+  usuario->presupuesto: Consultar categorías del usuario
+  presupuesto->base de datos:Consultar categorias por usuario
+  base de datos->presupuesto: devolver categorias
+  presupuesto->usuario: lista de categorias
+else login fallido
+micro_usuario ->usuario: acceso denegado
+end

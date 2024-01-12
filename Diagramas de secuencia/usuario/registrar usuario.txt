@@ -2,8 +2,8 @@ title Registrar usuario
 usuario->micro_usuario:Registrar usuario
 micro_usuario->micro_usuario: Validar existencia del usuario
 alt si existe
-micro_usuario->usuario: Error, usuario ya exixte
+micro_usuario->usuario: Error, usuario ya existe
 else si no existe
 micro_usuario->base de datos: Se registra usuario en UserInfo
+micro_usuario->base de datos: Se registra usuario en UserLogin
 end
-

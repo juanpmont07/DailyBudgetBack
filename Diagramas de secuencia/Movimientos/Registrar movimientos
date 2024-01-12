@@ -1,0 +1,14 @@
+title Registrar movimientos
+usuario->micro_usuario:validar acceso del usuario
+alt login correcto
+  usuario->micro_usuario: Consultar usuario
+  micro_usuario->usuario: Usuario consultado
+  usuario->presupuesto: Registrar lista movimientos
+  loop por cada movimiento nuevo
+      presupuesto->base de datos: Guardar información del movimiento
+  end
+  presupuesto->micro_usuario: Movimientos creados
+  micro_usuario->usuario: Movimientos registrados exitosamente
+else login fallido
+micro_usuario ->usuario: acceso denegado
+end
